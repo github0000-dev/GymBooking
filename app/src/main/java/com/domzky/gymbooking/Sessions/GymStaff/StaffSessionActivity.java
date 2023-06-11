@@ -1,6 +1,7 @@
 package com.domzky.gymbooking.Sessions.GymStaff;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.domzky.gymbooking.Sessions.GymStaff.pages.Account.AccountFragment;
 import com.domzky.gymbooking.Sessions.GymStaff.pages.MembersList.MembersListFragment;
 import com.domzky.gymbooking.Sessions.GymStaff.pages.TasksList.TasksListFragment;
 import com.domzky.gymbooking.Sessions.GymStaff.pages.AboutGym.AboutGymFragment;
+import com.domzky.gymbooking.Sessions.UsersActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class StaffSessionActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -103,6 +105,9 @@ public class StaffSessionActivity extends AppCompatActivity implements Navigatio
             case R.id.staff_menu_account:
                 changeFragmentMenu(new AccountFragment(),item.toString());
                 break;
+            case R.id.staff_menu_logout:
+                logOutSessionFunction();
+                break;
             default:
                 changeFragmentMenu(new TasksListFragment(),item.toString());
                 break;
@@ -115,6 +120,30 @@ public class StaffSessionActivity extends AppCompatActivity implements Navigatio
     private void changeFragmentMenu(Fragment fragment, String menuTitle) {
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_container,fragment).commit();
         toolbar.setTitle(menuTitle);
+    }
+
+
+    private void logOutSessionFunction(){
+//        AlertDialog.Builder builder = new AlertDialog.Builder(AdminSessionActivity.this);
+//        builder.setMessage("Are You Sure to Log Out?");
+//        builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                startActivity(new Intent(getApplicationContext(), UsersActivity.class));
+//                finishAffinity();
+//            }
+//        });builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                // NOTHING
+//            }
+//        });
+//        builder.setCancelable(false);
+//        builder.create().show();
+
+        startActivity(new Intent(getApplicationContext(), UsersActivity.class));
+        finishAffinity();
+
     }
 
 }

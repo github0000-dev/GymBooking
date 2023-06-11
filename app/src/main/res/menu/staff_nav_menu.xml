@@ -18,5 +18,9 @@
             android:id="@+id/staff_menu_account"
             android:icon="@drawable/ic_baseline_person_24"
             android:title="My Account"  />
+        <item
+            android:id="@+id/staff_menu_logout"
+            android:icon="@drawable/ic_baseline_logout_24"
+            android:title="Log Out"  />
     </group>
 </menu>

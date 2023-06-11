@@ -13,6 +13,22 @@
         android:theme="@style/Theme.GymBooking"
         tools:targetApi="31">
         <activity
+            android:name=".Sessions.Admin.pages.GymsList.ModifyGym.ModifyGymActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Sessions.Admin.pages.GymsList.AddGym.AddGymActivity"
+            android:exported="false"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".Sessions.Admin.AdminSessionActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Sessions.UsersActivity"
             android:exported="false">
             <meta-data

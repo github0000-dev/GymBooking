@@ -2,6 +2,7 @@ package com.domzky.gymbooking.Sessions.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -9,6 +10,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +22,7 @@ import com.domzky.gymbooking.Sessions.Admin.pages.Account.AccountFragment;
 import com.domzky.gymbooking.Sessions.Admin.pages.Dashboard.DashboardFragment;
 import com.domzky.gymbooking.Sessions.Admin.pages.Settings.SettingsFragment;
 import com.domzky.gymbooking.Sessions.Admin.pages.GymsList.GymsListMenuFragment;
+import com.domzky.gymbooking.Sessions.UsersActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class AdminSessionActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -99,11 +103,14 @@ public class AdminSessionActivity extends AppCompatActivity implements Navigatio
             case R.id.admin_menu_users:
                 changeFragmentMenu(new GymsListMenuFragment(),item.toString());
                 break;
+            case R.id.admin_menu_settings:
+                changeFragmentMenu(new SettingsFragment(),item.toString());
+                break;
             case R.id.admin_menu_account:
                 changeFragmentMenu(new AccountFragment(),item.toString());
                 break;
-            case R.id.admin_menu_settings:
-                changeFragmentMenu(new SettingsFragment(),item.toString());
+            case R.id.admin_menu_logout:
+                logOutSessionFunction();
                 break;
             default:
                 changeFragmentMenu(new GymsListMenuFragment(),item.toString());
@@ -117,5 +124,28 @@ public class AdminSessionActivity extends AppCompatActivity implements Navigatio
     private void changeFragmentMenu(Fragment fragment,String menuTitle) {
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_container,fragment).commit();
         toolbar.setTitle(menuTitle);
+    }
+
+    private void logOutSessionFunction(){
+//        AlertDialog.Builder builder = new AlertDialog.Builder(AdminSessionActivity.this);
+//        builder.setMessage("Are You Sure to Log Out?");
+//        builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                startActivity(new Intent(getApplicationContext(), UsersActivity.class));
+//                finishAffinity();
+//            }
+//        });builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                // NOTHING
+//            }
+//        });
+//        builder.setCancelable(false);
+//        builder.create().show();
+
+        startActivity(new Intent(getApplicationContext(), UsersActivity.class));
+        finishAffinity();
+
     }
 }

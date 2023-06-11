@@ -1,16 +1,19 @@
 package com.domzky.gymbooking.Sessions.Admin.pages.GymsList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.domzky.gymbooking.Helpers.Users.GymOwner;
 import com.domzky.gymbooking.R;
+import com.domzky.gymbooking.Sessions.Admin.pages.GymsList.ModifyGym.ModifyGymActivity;
 
 import java.util.List;
 import java.util.Locale;
@@ -18,27 +21,28 @@ import java.util.Locale;
 public class GymsListAdapter extends RecyclerView.Adapter<GymsListAdapter.ViewHolder> {
 
     List<GymOwner> list;
-    GymsListAdapter.onItemClick clicker;
+    Context wholeContext;
 
-    public GymsListAdapter(List<GymOwner> list) {
+//    public GymsListAdapter(List<GymOwner> list) {
+//        this.list = list;
+//    }
+
+    public GymsListAdapter(List<GymOwner> list,Context context) {
         this.list = list;
+        this.wholeContext = context;
     }
 
-    public GymsListAdapter(List<GymOwner> list, GymsListAdapter.onItemClick clicker) {
-        this.list = list;
-        this.clicker = clicker;
-    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView gymname,fullname,gymaddress;
+        public View thisView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             fullname = itemView.findViewById(R.id.owner_item_full_name);
             gymname = itemView.findViewById(R.id.owner_item_gym_name);
             gymaddress = itemView.findViewById(R.id.owner_item_gym_address);
-
         }
     }
 
@@ -61,6 +65,12 @@ public class GymsListAdapter extends RecyclerView.Adapter<GymsListAdapter.ViewHo
         holder.fullname.setText(owner.getOwnerFullname());
         holder.gymaddress.setText(owner.getGymAddress());
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                wholeContext.startActivity(new Intent(wholeContext, ModifyGymActivity.class));
+            }
+        });
     }
 
     @Override
@@ -68,7 +78,4 @@ public class GymsListAdapter extends RecyclerView.Adapter<GymsListAdapter.ViewHo
         return list.size();
     }
 
-    public interface onItemClick {
-        void onClick(View v,int position);
-    }
 }
