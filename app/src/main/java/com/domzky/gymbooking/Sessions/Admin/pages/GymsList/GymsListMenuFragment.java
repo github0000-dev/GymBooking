@@ -36,16 +36,16 @@ public class GymsListMenuFragment extends Fragment {
 
         List<GymOwner> owners = new ArrayList<>();
 
-        owners.add(new GymOwner("Gymers","Bohol","Phil Adlaon"));
-        owners.add(new GymOwner("Suello Gym","Tagbilaran","Jun Suello"));
-        owners.add(new GymOwner("Gymers","Bohol","Phil Adlaon"));
-        owners.add(new GymOwner("Suello Gym","Tagbilaran","Jun Suello"));
-        owners.add(new GymOwner("Gymers","Bohol","Phil Adlaon"));
-        owners.add(new GymOwner("Suello Gym","Tagbilaran","Jun Suello"));
-        owners.add(new GymOwner("Gymers","Bohol","Phil Adlaon"));
-        owners.add(new GymOwner("Suello Gym","Tagbilaran","Jun Suello"));
-        owners.add(new GymOwner("Gymers","Bohol","Phil Adlaon"));
-        owners.add(new GymOwner("Suello Gym","Tagbilaran","Jun Suello"));
+        owners.add(new GymOwner("Gymers","Bohol","Phil Adlaon",true));
+        owners.add(new GymOwner("Suello Gym","Tagbilaran","Jun Suello",true));
+        owners.add(new GymOwner("Gymers","Bohol","Phil Adlaon",false));
+        owners.add(new GymOwner("Suello Gym","Tagbilaran","Jun Suello",true));
+        owners.add(new GymOwner("Gymers","Bohol","Phil Adlaon",false));
+        owners.add(new GymOwner("Suello Gym","Tagbilaran","Jun Suello",false));
+        owners.add(new GymOwner("Gymers","Bohol","Phil Adlaon",false));
+        owners.add(new GymOwner("Suello Gym","Tagbilaran","Jun Suello",true));
+        owners.add(new GymOwner("Gymers","Bohol","Phil Adlaon",false));
+        owners.add(new GymOwner("Suello Gym","Tagbilaran","Jun Suello",true));
 
         recyclerView.setAdapter(new GymsListAdapter(owners,getActivity()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

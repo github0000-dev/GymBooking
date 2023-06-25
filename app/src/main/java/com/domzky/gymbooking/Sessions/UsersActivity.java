@@ -9,10 +9,12 @@ import android.view.View;
 import android.widget.Button;
 
 import com.domzky.gymbooking.R;
+import com.domzky.gymbooking.Sessions.Admin.AdminLoginActivity;
 import com.domzky.gymbooking.Sessions.Admin.AdminSessionActivity;
 import com.domzky.gymbooking.Sessions.GymCoaches.CoachSessionActivity;
 import com.domzky.gymbooking.Sessions.GymOwner.OwnerSessionActivity;
 import com.domzky.gymbooking.Sessions.GymStaff.StaffSessionActivity;
+import com.domzky.gymbooking.Sessions.Members.MemberLoginActivity;
 import com.domzky.gymbooking.Sessions.Members.MemberSessionActivity;
 
 public class UsersActivity extends AppCompatActivity {
@@ -35,7 +37,7 @@ public class UsersActivity extends AppCompatActivity {
         btn_admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(UsersActivity.this, AdminSessionActivity.class));
+                startActivity(new Intent(UsersActivity.this, AdminLoginActivity.class));
             }
         });
 
@@ -64,7 +66,7 @@ public class UsersActivity extends AppCompatActivity {
         btn_member.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(UsersActivity.this, MemberSessionActivity.class));
+                startActivity(new Intent(UsersActivity.this, MemberLoginActivity.class));
             }
         });
 

@@ -1,12 +1,12 @@
-package com.domzky.gymbooking.Sessions;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.domzky.gymbooking.Sessions.GymOwner;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.domzky.gymbooking.R;
 
-public class LoginActivity extends AppCompatActivity {
+public class OwnerLoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

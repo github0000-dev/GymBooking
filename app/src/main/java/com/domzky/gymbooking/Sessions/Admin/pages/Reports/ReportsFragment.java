@@ -1,4 +1,4 @@
-package com.domzky.gymbooking.Sessions.Admin.pages.Settings;
+package com.domzky.gymbooking.Sessions.Admin.pages.Reports;
 
 import android.os.Bundle;
 
@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 
 import com.domzky.gymbooking.R;
 
-public class SettingsFragment extends Fragment {
+public class ReportsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_admin_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_admin_reports, container, false);
 
 
 

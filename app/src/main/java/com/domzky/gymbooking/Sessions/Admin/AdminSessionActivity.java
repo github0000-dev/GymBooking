@@ -10,8 +10,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,9 +22,8 @@ import android.widget.TextView;
 import com.domzky.gymbooking.R;
 import com.domzky.gymbooking.Sessions.Admin.pages.Account.AccountFragment;
 import com.domzky.gymbooking.Sessions.Admin.pages.Dashboard.DashboardFragment;
-import com.domzky.gymbooking.Sessions.Admin.pages.Settings.SettingsFragment;
+import com.domzky.gymbooking.Sessions.Admin.pages.Reports.ReportsFragment;
 import com.domzky.gymbooking.Sessions.Admin.pages.GymsList.GymsListMenuFragment;
-import com.domzky.gymbooking.Sessions.UsersActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class AdminSessionActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,6 +32,8 @@ public class AdminSessionActivity extends AppCompatActivity implements Navigatio
     private NavigationView navigationView;
     private Toolbar toolbar;
 
+    public TextView headUserName;
+
 
     private long backPressedTime = 0;
 
@@ -38,6 +41,9 @@ public class AdminSessionActivity extends AppCompatActivity implements Navigatio
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_session);
+
+
+        SharedPreferences preferences = this.getSharedPreferences("admin", Context.MODE_PRIVATE);
 
         // Setting my component hooks
         drawerLayout = findViewById(R.id.drawerlayout);
@@ -65,9 +71,9 @@ public class AdminSessionActivity extends AppCompatActivity implements Navigatio
 
         // Set navigation header values
         View headerView = navigationView.getHeaderView(0);
-        TextView headUserName = headerView.findViewById(R.id.nav_account_name);
+        headUserName = headerView.findViewById(R.id.nav_account_name);
         TextView headUserType = headerView.findViewById(R.id.nav_account_type);
-        headUserName.setText("Domz Mejares");
+        headUserName.setText(preferences.getString("fullname",""));
         headUserType.setText("Admin");
 
 
@@ -100,11 +106,11 @@ public class AdminSessionActivity extends AppCompatActivity implements Navigatio
             case R.id.admin_menu_dashboard:
                 changeFragmentMenu(new DashboardFragment(),item.toString());
                 break;
+            case R.id.admin_menu_reports:
+                changeFragmentMenu(new ReportsFragment(),item.toString());
+                break;
             case R.id.admin_menu_users:
                 changeFragmentMenu(new GymsListMenuFragment(),item.toString());
-                break;
-            case R.id.admin_menu_settings:
-                changeFragmentMenu(new SettingsFragment(),item.toString());
                 break;
             case R.id.admin_menu_account:
                 changeFragmentMenu(new AccountFragment(),item.toString());
@@ -113,7 +119,7 @@ public class AdminSessionActivity extends AppCompatActivity implements Navigatio
                 logOutSessionFunction();
                 break;
             default:
-                changeFragmentMenu(new GymsListMenuFragment(),item.toString());
+                changeFragmentMenu(new DashboardFragment(),item.toString());
                 break;
         }
 
@@ -144,7 +150,7 @@ public class AdminSessionActivity extends AppCompatActivity implements Navigatio
 //        builder.setCancelable(false);
 //        builder.create().show();
 
-        startActivity(new Intent(getApplicationContext(), UsersActivity.class));
+        startActivity(new Intent(getApplicationContext(), AdminLoginActivity.class));
         finishAffinity();
 
     }

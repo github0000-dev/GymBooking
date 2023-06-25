@@ -23,10 +23,6 @@ public class GymsListAdapter extends RecyclerView.Adapter<GymsListAdapter.ViewHo
     List<GymOwner> list;
     Context wholeContext;
 
-//    public GymsListAdapter(List<GymOwner> list) {
-//        this.list = list;
-//    }
-
     public GymsListAdapter(List<GymOwner> list,Context context) {
         this.list = list;
         this.wholeContext = context;

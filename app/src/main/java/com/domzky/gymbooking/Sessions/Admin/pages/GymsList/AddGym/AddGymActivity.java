@@ -18,9 +18,11 @@ import com.domzky.gymbooking.R;
 public class AddGymActivity extends AppCompatActivity {
 
     private TextView gym_form;
-    private EditText gym_name,gymress,owner_name,owner_email,owner_phoneNum,owner_username,owner_password;
+    private EditText gym_name,gym_address,owner_name,owner_email,owner_phoneNum,owner_username,owner_password;
     private Button add_button,delete_button;
     private CheckBox check_password;
+
+    private String gymname,gymaddress,ownername,owneremail,ownerphoneNum,ownerusername,ownerpassword;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -32,12 +34,20 @@ public class AddGymActivity extends AppCompatActivity {
         gym_form.setText("Gym Registration Form");
 
         gym_name = (EditText) findViewById(R.id.admin_gym_field_gym_name);
-        gymress = (EditText) findViewById(R.id.admin_gym_field_gym_address);
+        gym_address = (EditText) findViewById(R.id.admin_gym_field_gym_address);
         owner_name = (EditText) findViewById(R.id.admin_gym_field_fullname);
         owner_email = (EditText) findViewById(R.id.admin_gym_field_email);
         owner_phoneNum = (EditText) findViewById(R.id.admin_gym_field_phone);
         owner_username = (EditText) findViewById(R.id.admin_gym_field_username);
         owner_password = (EditText) findViewById(R.id.admin_gym_field_password);
+
+        gymname = gym_name.getText().toString().trim();
+        gymaddress = gym_address.getText().toString().trim();
+        ownername = owner_name.getText().toString().trim();
+        owneremail = owner_email.getText().toString().trim();
+        ownerphoneNum = owner_phoneNum.getText().toString().trim();
+        ownerusername = owner_username.getText().toString().trim();
+        ownerpassword = owner_password.getText().toString().trim();
 
         add_button = (Button) findViewById(R.id.admin_gym_button_submit);
         delete_button = (Button) findViewById(R.id.admin_gym_button_delete);
