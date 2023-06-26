@@ -90,6 +90,8 @@
         </activity>
         <activity
             android:name=".Sessions.Members.MemberLoginActivity"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".Sessions.UsersActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -97,6 +99,8 @@
         </activity>
         <activity
             android:name=".Sessions.GymStaff.StaffLoginActivity"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".Sessions.UsersActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -104,6 +108,17 @@
         </activity>
         <activity
             android:name=".Sessions.GymCoaches.CoachLoginActivity"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".Sessions.UsersActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Sessions.GymOwner.OwnerLoginActivity"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".Sessions.UsersActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

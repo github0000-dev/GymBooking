@@ -1,46 +1,35 @@
 package com.domzky.gymbooking.Helpers.Users;
 
 public class GymOwner {
+
+    public String gym_name,gym_address;
     
-    public String gym_name,gym_address,owner_fullname,owner_email,owner_password;
-    public Boolean activated;
-    public int age;
+    public String uid,fullname,email,phone,username,password;
 
-    public GymOwner(String gym_name,String gym_address,String owner_fullname) {
+    public GymOwner(String uid,String fullname,String gym_name,String gym_address) {
+        this.uid = uid;
         this.gym_name = gym_name;
         this.gym_address = gym_address;
-        this.owner_fullname = owner_fullname;
-    }
-    public GymOwner(String gym_name,String gym_address,String owner_fullname,Boolean activated) {
-        this.gym_name = gym_name;
-        this.gym_address = gym_address;
-        this.owner_fullname = owner_fullname;
-        this.activated = activated;
+        this.fullname = fullname;
     }
 
-    public GymOwner(String gym_name,String gym_address,String owner_fullname,String owner_password,Boolean activated) {
-        this.gym_name = gym_name;
-        this.gym_address = gym_address;
-        this.owner_fullname = owner_fullname;
-        this.owner_password = owner_password;
-        this.activated = activated;
+    public GymOwner(String fullname,String email,String phone,String username,String password) {
+        this.email = email;
+        this.phone = phone;
+        this.fullname = fullname;
+        this.username = username;
+        this.password = password;
     }
 
-    public String getGymName() {
-        return this.gym_name;
+    public GymOwner(String uid,String fullname,String email,String phone,String username,String password) {
+        this.uid = uid;
+        this.email = email;
+        this.phone = phone;
+        this.fullname = fullname;
+        this.username = username;
+        this.password = password;
     }
 
-    public String getGymAddress() {
-        return this.gym_address;
-    }
-
-    public String getOwnerFullname() {
-        return this.owner_fullname;
-    }
-
-    public String getOwnerEmail() {
-        return this.owner_email;
-    }
     
     
 

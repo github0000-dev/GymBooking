@@ -150,7 +150,6 @@ public class AdminSignupActivity extends AppCompatActivity {
                                 fullnameField.setError("This Full Name cannot used when Existed.");
                             }
                             progress.dismiss();
-                            return;
                         } else {
                             progress.dismiss();
                             fwrite.push().setValue(new Admin(fullname,email,phone,username,password))

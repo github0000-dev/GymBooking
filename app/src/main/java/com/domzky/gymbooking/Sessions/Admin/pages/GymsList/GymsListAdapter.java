@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.domzky.gymbooking.Helpers.Users.Gym;
 import com.domzky.gymbooking.Helpers.Users.GymOwner;
 import com.domzky.gymbooking.R;
 import com.domzky.gymbooking.Sessions.Admin.pages.GymsList.ModifyGym.ModifyGymActivity;
@@ -20,10 +21,10 @@ import java.util.Locale;
 
 public class GymsListAdapter extends RecyclerView.Adapter<GymsListAdapter.ViewHolder> {
 
-    List<GymOwner> list;
+    List<Gym> list;
     Context wholeContext;
 
-    public GymsListAdapter(List<GymOwner> list,Context context) {
+    public GymsListAdapter(List<Gym> list,Context context) {
         this.list = list;
         this.wholeContext = context;
     }
@@ -32,7 +33,6 @@ public class GymsListAdapter extends RecyclerView.Adapter<GymsListAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView gymname,fullname,gymaddress;
-        public View thisView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -55,16 +55,27 @@ public class GymsListAdapter extends RecyclerView.Adapter<GymsListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull GymsListAdapter.ViewHolder holder, int position) {
-        GymOwner owner = list.get(position);
+        Gym gym = list.get(position);
 
-        holder.gymname.setText(owner.getGymName().toUpperCase(Locale.ROOT));
-        holder.fullname.setText(owner.getOwnerFullname());
-        holder.gymaddress.setText(owner.getGymAddress());
+        holder.gymname.setText(gym.gym_name.toUpperCase(Locale.ROOT));
+        holder.fullname.setText(gym.owner.fullname);
+        holder.gymaddress.setText(gym.gym_address);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                wholeContext.startActivity(new Intent(wholeContext, ModifyGymActivity.class));
+                wholeContext.startActivity(new Intent(wholeContext, ModifyGymActivity.class)
+                        .putExtra("gymuid",gym.uid)
+                        .putExtra("gymname",gym.gym_name)
+                        .putExtra("gymaddress",gym.gym_address)
+                        .putExtra("gymactivated",gym.gym_activated)
+                        .putExtra("gymstatus",gym.gym_status)
+                        .putExtra("ownername",gym.owner.fullname)
+                        .putExtra("owneremail",gym.owner.email)
+                        .putExtra("ownerphone",gym.owner.phone)
+                        .putExtra("ownerusername",gym.owner.username)
+                        .putExtra("ownerpassword",gym.owner.password)
+                );
             }
         });
     }

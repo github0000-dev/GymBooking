@@ -8,6 +8,13 @@ public class FirebaseHelper {
 
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
+    public DatabaseReference getRootReference() {
+        return ref;
+    }
+    public DatabaseReference getGymReference() {
+        return ref.child("Gyms");
+    }
+
     public DatabaseReference getWholeUserReference() {
         return ref.child("Users");
     }

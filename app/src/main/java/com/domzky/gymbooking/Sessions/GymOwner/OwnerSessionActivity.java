@@ -8,8 +8,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
-import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +18,7 @@ import android.widget.TextView;
 
 import com.domzky.gymbooking.R;
 import com.domzky.gymbooking.Sessions.GymOwner.pages.Account.AccountFragment;
-import com.domzky.gymbooking.Sessions.GymOwner.pages.CoachList.CoachesListFragment;
+import com.domzky.gymbooking.Sessions.GymOwner.pages.CoachesList.CoachesListFragment;
 import com.domzky.gymbooking.Sessions.GymOwner.pages.Dashboard.DashboardFragment;
 import com.domzky.gymbooking.Sessions.GymOwner.pages.MemberList.MembersListFragment;
 import com.domzky.gymbooking.Sessions.GymOwner.pages.Membership.MembershipFragment;
@@ -32,10 +33,18 @@ public class OwnerSessionActivity extends AppCompatActivity implements Navigatio
     private NavigationView navigationView;
     private Toolbar toolbar;
 
+    public TextView headUserName;
+
+
+    private long backPressedTime = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_session);
+
+
+        SharedPreferences preferences = this.getSharedPreferences("owner", Context.MODE_PRIVATE);
 
         // Setting my component hooks
         drawerLayout = findViewById(R.id.drawerlayout);
@@ -63,9 +72,9 @@ public class OwnerSessionActivity extends AppCompatActivity implements Navigatio
 
         // Set navigation header values
         View headerView = navigationView.getHeaderView(0);
-        TextView headUserName = headerView.findViewById(R.id.nav_account_name);
+        headUserName = headerView.findViewById(R.id.nav_account_name);
         TextView headUserType = headerView.findViewById(R.id.nav_account_type);
-        headUserName.setText("Phil Adlaon");
+        headUserName.setText(preferences.getString("fullname",""));
         headUserType.setText("Owner");
 
 
@@ -81,7 +90,6 @@ public class OwnerSessionActivity extends AppCompatActivity implements Navigatio
         toggle.syncState();
 
     }
-
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {

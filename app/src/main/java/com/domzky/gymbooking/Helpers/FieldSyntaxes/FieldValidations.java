@@ -67,6 +67,15 @@ public class FieldValidations {
         return false;
     }
 
+    public boolean isGymNameExists(DataSnapshot snapshot,String username) {
+        for (DataSnapshot snap : snapshot.getChildren()) {
+            if (snap.child("gym_name").getValue(String.class).equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean isFullnameExists(DataSnapshot snapshot,String fullname) {
         for (DataSnapshot snap : snapshot.getChildren()) {
             if (snap.child("fullname").getValue(String.class).equals(fullname)) {

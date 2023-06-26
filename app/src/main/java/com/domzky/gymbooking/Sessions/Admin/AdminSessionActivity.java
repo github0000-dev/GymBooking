@@ -24,6 +24,7 @@ import com.domzky.gymbooking.Sessions.Admin.pages.Account.AccountFragment;
 import com.domzky.gymbooking.Sessions.Admin.pages.Dashboard.DashboardFragment;
 import com.domzky.gymbooking.Sessions.Admin.pages.Reports.ReportsFragment;
 import com.domzky.gymbooking.Sessions.Admin.pages.GymsList.GymsListMenuFragment;
+import com.domzky.gymbooking.Sessions.UsersActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class AdminSessionActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -150,7 +151,7 @@ public class AdminSessionActivity extends AppCompatActivity implements Navigatio
 //        builder.setCancelable(false);
 //        builder.create().show();
 
-        startActivity(new Intent(getApplicationContext(), AdminLoginActivity.class));
+        startActivity(new Intent(getApplicationContext(), UsersActivity.class));
         finishAffinity();
 
     }

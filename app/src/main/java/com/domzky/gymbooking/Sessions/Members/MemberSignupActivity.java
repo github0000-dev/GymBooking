@@ -147,7 +147,6 @@ public class MemberSignupActivity extends AppCompatActivity {
                                     fullnameField.setError("This Full Name cannot used when Existed.");
                                 }
                                 progress.dismiss();
-                                return;
                             } else {
                                 clearAllFieldValidations();
                                 progress.dismiss();

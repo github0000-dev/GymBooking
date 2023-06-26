@@ -148,7 +148,7 @@ public class MemberSessionActivity extends AppCompatActivity implements Navigati
 //        builder.setCancelable(false);
 //        builder.create().show();
 
-        startActivity(new Intent(getApplicationContext(), MemberLoginActivity.class));
+        startActivity(new Intent(getApplicationContext(), UsersActivity.class));
         finishAffinity();
 
     }

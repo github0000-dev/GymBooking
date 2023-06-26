@@ -28,6 +28,7 @@ import com.domzky.gymbooking.Helpers.Firebase.FirebaseHelper;
 import com.domzky.gymbooking.Helpers.Users.GymMember;
 import com.domzky.gymbooking.R;
 import com.domzky.gymbooking.Sessions.Admin.AdminSessionActivity;
+import com.domzky.gymbooking.Sessions.GymOwner.OwnerSessionActivity;
 import com.domzky.gymbooking.Sessions.Members.MemberSessionActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -44,8 +45,8 @@ public class AccountFragment extends Fragment {
     private Button updateBtn,resetBtn;
     private CheckBox showPassword;
 
-    private DatabaseReference dbread = new FirebaseHelper().getUserReference("Members");
-    private DatabaseReference dbwrite = new FirebaseHelper().getUserReference("Members");
+    private DatabaseReference dbread = new FirebaseHelper().getUserReference("Admins");
+    private DatabaseReference dbwrite = new FirebaseHelper().getUserReference("Admins");
 
     private FieldValidations fieldVal = new FieldValidations();
 

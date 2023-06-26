@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.07"  />
+        app:layout_constraintVertical_bias="0.05"  />
 
     <EditText
         android:id="@+id/admin_gym_field_gym_name"
@@ -55,6 +55,21 @@
         app:layout_constraintVertical_bias="0.02"  />
 
 
+    <Switch
+        android:id="@+id/admin_gym_field_activation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:ems="10"
+        android:hint="Activation"
+        tools:layout_editor_absoluteX="66dp"
+        tools:layout_editor_absoluteY="187dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/admin_gym_field_gym_address"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.02"  />
 
     <EditText
         android:id="@+id/admin_gym_field_fullname"
@@ -67,9 +82,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/admin_gym_field_gym_address"
+        app:layout_constraintTop_toBottomOf="@+id/admin_gym_field_activation"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.07"  />
+        app:layout_constraintVertical_bias="0.02"  />
+
 
     <EditText
         android:id="@+id/admin_gym_field_email"
@@ -152,11 +168,11 @@
         app:layout_constraintVertical_bias="0.197"/>
 
     <Button
-        android:id="@+id/admin_gym_button_delete"
+        android:id="@+id/admin_gym_button_reset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#4BD61919"
-        android:text="Delete Gym"
+        android:text="Reset Fields"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -175,5 +191,6 @@
         app:layout_constraintStart_toEndOf="@+id/admin_gym_field_password"
         app:layout_constraintTop_toBottomOf="@+id/admin_gym_field_username"
         app:layout_constraintVertical_bias="0.054" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

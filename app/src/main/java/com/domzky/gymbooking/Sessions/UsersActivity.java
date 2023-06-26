@@ -12,6 +12,7 @@ import com.domzky.gymbooking.R;
 import com.domzky.gymbooking.Sessions.Admin.AdminLoginActivity;
 import com.domzky.gymbooking.Sessions.Admin.AdminSessionActivity;
 import com.domzky.gymbooking.Sessions.GymCoaches.CoachSessionActivity;
+import com.domzky.gymbooking.Sessions.GymOwner.OwnerLoginActivity;
 import com.domzky.gymbooking.Sessions.GymOwner.OwnerSessionActivity;
 import com.domzky.gymbooking.Sessions.GymStaff.StaffSessionActivity;
 import com.domzky.gymbooking.Sessions.Members.MemberLoginActivity;
@@ -44,7 +45,7 @@ public class UsersActivity extends AppCompatActivity {
         btn_owner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(UsersActivity.this, OwnerSessionActivity.class));
+                startActivity(new Intent(UsersActivity.this, OwnerLoginActivity.class));
             }
         });
 
