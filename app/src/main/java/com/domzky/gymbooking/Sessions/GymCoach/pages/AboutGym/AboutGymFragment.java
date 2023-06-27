@@ -1,4 +1,4 @@
-package com.domzky.gymbooking.Sessions.GymCoaches.pages.Programs;
+package com.domzky.gymbooking.Sessions.GymCoach.pages.AboutGym;
 
 import android.os.Bundle;
 
@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 
 import com.domzky.gymbooking.R;
 
-public class ProgramsFragment extends Fragment {
-
+public class AboutGymFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_coach_programs, container, false);
+        View view = inflater.inflate(R.layout.fragment_coach_about_gym, container, false);
+
 
 
         return view;

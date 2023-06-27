@@ -1,7 +1,7 @@
-package com.domzky.gymbooking.Sessions.GymCoaches;
+package com.domzky.gymbooking.Sessions.GymCoach;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,10 +16,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.domzky.gymbooking.R;
-import com.domzky.gymbooking.Sessions.GymCoaches.pages.AboutGym.AboutGymFragment;
-import com.domzky.gymbooking.Sessions.GymCoaches.pages.Account.AccountFragment;
-import com.domzky.gymbooking.Sessions.GymCoaches.pages.MembersList.MembersListFragment;
-import com.domzky.gymbooking.Sessions.GymCoaches.pages.Programs.ProgramsFragment;
+import com.domzky.gymbooking.Sessions.GymCoach.pages.AboutGym.AboutGymFragment;
+import com.domzky.gymbooking.Sessions.GymCoach.pages.Account.AccountFragment;
+import com.domzky.gymbooking.Sessions.GymCoach.pages.MembersList.MembersListFragment;
+import com.domzky.gymbooking.Sessions.GymCoach.pages.Programs.ProgramsFragment;
 import com.domzky.gymbooking.Sessions.UsersActivity;
 import com.google.android.material.navigation.NavigationView;
 
@@ -29,10 +29,16 @@ public class CoachSessionActivity extends AppCompatActivity implements Navigatio
     private NavigationView navigationView;
     private Toolbar toolbar;
 
+    public TextView headUserName;
+
+    private SharedPreferences preferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_session);
+
+        preferences = getSharedPreferences("coach",MODE_PRIVATE);
 
         // Setting my component hooks
         drawerLayout = findViewById(R.id.drawerlayout);
@@ -60,9 +66,9 @@ public class CoachSessionActivity extends AppCompatActivity implements Navigatio
 
         // Set navigation header values
         View headerView = navigationView.getHeaderView(0);
-        TextView headUserName = headerView.findViewById(R.id.nav_account_name);
+        headUserName = headerView.findViewById(R.id.nav_account_name);
         TextView headUserType = headerView.findViewById(R.id.nav_account_type);
-        headUserName.setText("Jun Suello");
+        headUserName.setText(preferences.getString("fullname",""));
         headUserType.setText("Coach");
 
 

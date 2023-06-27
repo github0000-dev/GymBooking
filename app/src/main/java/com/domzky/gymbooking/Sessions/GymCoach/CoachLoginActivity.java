@@ -1,4 +1,4 @@
-package com.domzky.gymbooking.Sessions.GymStaff;
+package com.domzky.gymbooking.Sessions.GymCoach;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -20,14 +20,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.domzky.gymbooking.Helpers.Firebase.FirebaseHelper;
 import com.domzky.gymbooking.R;
-import com.domzky.gymbooking.Sessions.GymStaff.StaffLoginActivity;
-import com.domzky.gymbooking.Sessions.GymStaff.StaffSessionActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-public class StaffLoginActivity extends AppCompatActivity {
+public class CoachLoginActivity extends AppCompatActivity {
 
     private DatabaseReference login;
 
@@ -40,19 +38,20 @@ public class StaffLoginActivity extends AppCompatActivity {
 
     private ProgressDialog progress;
 
+    private SharedPreferences preferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
-        progress = new ProgressDialog(StaffLoginActivity.this);
+        progress = new ProgressDialog(CoachLoginActivity.this);
         progress.setCancelable(false);
         progress.setMessage("Logging In");
 
         loginbanner = findViewById(R.id.login_text_banner);
 
-        loginbanner.setText("Gym Staff Login");
+        loginbanner.setText("Gym Coach Login");
 
         usernameField = findViewById(R.id.login_field_username);
         passwordField = findViewById(R.id.login_field_password);
@@ -90,7 +89,7 @@ public class StaffLoginActivity extends AppCompatActivity {
                 login.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snap) {
-                        DataSnapshot snapshot = snap.child("Users").child("Staffs");
+                        DataSnapshot snapshot = snap.child("Users").child("Coaches");
                         DataSnapshot snapGym = snap.child("Gyms");
                         String uid = loginGetUid(snapshot,username,password);
                         progress.dismiss();
@@ -100,7 +99,7 @@ public class StaffLoginActivity extends AppCompatActivity {
                         } else {
                             SharedPreferences preferences;
                             SharedPreferences.Editor editor;
-                            preferences = getSharedPreferences("staff",MODE_PRIVATE);
+                            preferences = getSharedPreferences("coach",MODE_PRIVATE);
                             editor = preferences.edit();
 
                             String gym_id = snapshot.child(uid).child("gym_id").getValue(String.class);
@@ -123,7 +122,7 @@ public class StaffLoginActivity extends AppCompatActivity {
 
                             Log.d("PASOK",username + ":" + password +" - Login SUCCESS");
 
-                            startActivity(new Intent(StaffLoginActivity.this, StaffSessionActivity.class));
+                            startActivity(new Intent(CoachLoginActivity.this, CoachSessionActivity.class));
                             finishAffinity();
                         }
                     }
@@ -156,13 +155,13 @@ public class StaffLoginActivity extends AppCompatActivity {
     }
 
     private void logSession() {
-        Log.d("userid",getSharedPreferences("staff",MODE_PRIVATE).getString("userid",""));
-        Log.d("gymname",getSharedPreferences("staff",MODE_PRIVATE).getString("gymname",""));
-        Log.d("gymaddress",getSharedPreferences("staff",MODE_PRIVATE).getString("gymaddress",""));
-        Log.d("username",getSharedPreferences("staff",MODE_PRIVATE).getString("username",""));
-        Log.d("password",getSharedPreferences("staff",MODE_PRIVATE).getString("password",""));
-        Log.d("fullname",getSharedPreferences("staff",MODE_PRIVATE).getString("fullname",""));
-        Log.d("email",getSharedPreferences("staff",MODE_PRIVATE).getString("email",""));
-        Log.d("phone",getSharedPreferences("staff",MODE_PRIVATE).getString("phone",""));
+        Log.d("userid",getSharedPreferences("coach",MODE_PRIVATE).getString("userid",""));
+        Log.d("gymname",getSharedPreferences("coach",MODE_PRIVATE).getString("gymname",""));
+        Log.d("gymaddress",getSharedPreferences("coach",MODE_PRIVATE).getString("gymaddress",""));
+        Log.d("username",getSharedPreferences("coach",MODE_PRIVATE).getString("username",""));
+        Log.d("password",getSharedPreferences("coach",MODE_PRIVATE).getString("password",""));
+        Log.d("fullname",getSharedPreferences("coach",MODE_PRIVATE).getString("fullname",""));
+        Log.d("email",getSharedPreferences("coach",MODE_PRIVATE).getString("email",""));
+        Log.d("phone",getSharedPreferences("coach",MODE_PRIVATE).getString("phone",""));
     }
 }

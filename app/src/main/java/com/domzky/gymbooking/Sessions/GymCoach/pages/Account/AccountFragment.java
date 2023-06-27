@@ -1,4 +1,4 @@
-package com.domzky.gymbooking.Sessions.Members.pages.Account;
+package com.domzky.gymbooking.Sessions.GymCoach.pages.Account;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -26,10 +26,10 @@ import android.widget.Toast;
 
 import com.domzky.gymbooking.Helpers.FieldSyntaxes.FieldValidations;
 import com.domzky.gymbooking.Helpers.Firebase.FirebaseHelper;
+import com.domzky.gymbooking.Helpers.Users.GymCoach;
 import com.domzky.gymbooking.Helpers.Users.GymMember;
 import com.domzky.gymbooking.R;
-import com.domzky.gymbooking.Sessions.Members.MemberLoginActivity;
-import com.domzky.gymbooking.Sessions.Members.MemberSessionActivity;
+import com.domzky.gymbooking.Sessions.GymCoach.CoachSessionActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -40,51 +40,62 @@ import com.google.firebase.database.ValueEventListener;
 
 public class AccountFragment extends Fragment {
 
+    private TextView gymNameText,gymAddressText,employeeBanner;
     private EditText fullnameField,emailField,phoneField,usernameField,passwordField;
     private Button updateBtn,resetBtn;
     private CheckBox showPassword;
 
-    private DatabaseReference dbread = new FirebaseHelper().getUserReference("Members");
-    private DatabaseReference dbwrite = new FirebaseHelper().getUserReference("Members");
+    private DatabaseReference dbread = new FirebaseHelper().getUserReference("Coaches");
+    private DatabaseReference dbwrite = new FirebaseHelper().getUserReference("Coaches");
 
     private FieldValidations fieldVal = new FieldValidations();
 
     private String fullname,email,phone,username,password;
-    
+
     private ProgressDialog progress;
 
     private SharedPreferences preferences;
     private SharedPreferences.Editor prefEditor;
 
+
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        preferences = getActivity().getSharedPreferences("member",Context.MODE_PRIVATE);
+        preferences = getActivity().getSharedPreferences("coach", Context.MODE_PRIVATE);
         prefEditor = preferences.edit();
 
         progress = new ProgressDialog(getActivity());
         progress.setCancelable(false);
         progress.setMessage("Changing Account");
 
-        View view = inflater.inflate(R.layout.fragment_member_account, container, false);
+        View view = inflater.inflate(R.layout.fragment_employee_account, container, false);
 
-        fullnameField = view.findViewById(R.id.member_account_update_field_fullname);
-        emailField = view.findViewById(R.id.member_account_update_field_email);
-        phoneField = view.findViewById(R.id.member_account_update_field_phone);
-        usernameField = view.findViewById(R.id.member_account_update_field_username);
-        passwordField = view.findViewById(R.id.member_account_update_field_password);
+        employeeBanner = view.findViewById(R.id.employee_account_textview_employee_of);
+        gymNameText = view.findViewById(R.id.employee_account_textview_gym_name);
+        gymAddressText = view.findViewById(R.id.employee_account_textview_gym_address);
 
-        fullnameField.setText(preferences.getString("fullname",""));
-        emailField.setText(preferences.getString("email",""));
-        phoneField.setText(preferences.getString("phone",""));
-        usernameField.setText(preferences.getString("username",""));
-        passwordField.setText(preferences.getString("password",""));
+        employeeBanner.setText("COACH OF");
+        gymNameText.setText(preferences.getString("gymname",""));
+        gymAddressText.setText(preferences.getString("gymaddress",""));
 
-        updateBtn = view.findViewById(R.id.member_account_update_button_submit);
-        resetBtn = view.findViewById(R.id.member_account_update_reset_button_fields);
-        showPassword = view.findViewById(R.id.member_account_update_checkbox_password);
+        fullnameField = view.findViewById(R.id.employee_account_update_field_fullname);
+        emailField = view.findViewById(R.id.employee_account_update_field_email);
+        phoneField = view.findViewById(R.id.employee_account_update_field_phone);
+        usernameField = view.findViewById(R.id.employee_account_update_field_username);
+        passwordField = view.findViewById(R.id.employee_account_update_field_password);
+
+        updateBtn = view.findViewById(R.id.employee_account_update_button_submit);
+        resetBtn = view.findViewById(R.id.employee_account_update_button_reset);
+        showPassword = view.findViewById(R.id.employee_account_update_checkbox_password);
+
+        resetAllFieldsByDefault();
+        resetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetAllFieldsByDefault();
+            }
+        });
 
         showPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -94,18 +105,6 @@ public class AccountFragment extends Fragment {
                 } else {
                     passwordField.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 }
-            }
-        });
-
-        resetBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clearAllFieldValidations();
-                fullnameField.setText(preferences.getString("fullname",""));
-                emailField.setText(preferences.getString("email",""));
-                phoneField.setText(preferences.getString("phone",""));
-                usernameField.setText(preferences.getString("username",""));
-                passwordField.setText(preferences.getString("password",""));
             }
         });
         
@@ -121,13 +120,9 @@ public class AccountFragment extends Fragment {
                 phone = phoneField.getText().toString().trim();
                 username = usernameField.getText().toString().trim();
                 password = passwordField.getText().toString().trim();
-                
+
                 if (
-                    fullname.equals(preferences.getString("fullname","")) &&
-                    email.equals(preferences.getString("email","")) &&
-                    phone.equals(preferences.getString("phone","")) &&
-                    username.equals(preferences.getString("username","")) &&
-                    password.equals(preferences.getString("password",""))
+                        checkIfFieldsAreSame()
                 ) {
                     Toast.makeText(getActivity(),"No Changes have been made.",Toast.LENGTH_SHORT).show();
                     progress.dismiss();
@@ -176,20 +171,20 @@ public class AccountFragment extends Fragment {
                     progress.dismiss();
                     return;
                 }
-                
-                
-                
+
+
+
                 dbread.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (
-                                fieldVal.isUsernameExists(snapshot,username) && !username.equals(preferences.getString("username","")) ||
-                                fieldVal.isFullnameExists(snapshot,fullname) && !fullname.equals(preferences.getString("fullname",""))
+                                fieldVal.isUsernameExists(snapshot, username) && !username.equals(preferences.getString("username", "")) ||
+                                        fieldVal.isFullnameExists(snapshot, fullname) && !fullname.equals(preferences.getString("fullname", ""))
                         ) {
-                            if (fieldVal.isUsernameExists(snapshot,username) && !username.equals(preferences.getString("username",""))) {
+                            if (fieldVal.isUsernameExists(snapshot, username) && !username.equals(preferences.getString("username", ""))) {
                                 usernameField.setError("This Username cannot used when Existed.");
                             }
-                            if (fieldVal.isFullnameExists(snapshot,fullname) && !fullname.equals(preferences.getString("fullname",""))) {
+                            if (fieldVal.isFullnameExists(snapshot, fullname) && !fullname.equals(preferences.getString("fullname", ""))) {
                                 fullnameField.setError("This Full Name cannot used when Existed.");
                             }
                             progress.dismiss();
@@ -210,28 +205,30 @@ public class AccountFragment extends Fragment {
                             builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    dbwrite.child(preferences.getString("userid","")).setValue(new GymMember(fullname,email,phone,username,password,true))
+                                    dbwrite.child(preferences.getString("userid", "")).setValue(new GymCoach(fullname, email, phone, username, password,
+                                                    preferences.getBoolean("activated",true),
+                                                    preferences.getString("gymid","")))
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
-                                                    Toast.makeText(getActivity(),"Account Changed Successfully",Toast.LENGTH_SHORT).show();
-                                                    prefEditor.putString("username",username);
-                                                    prefEditor.putString("password",password);
-                                                    prefEditor.putString("fullname",fullname);
-                                                    prefEditor.putString("phone",phone);
-                                                    prefEditor.putString("email",email);
+                                                    Toast.makeText(getActivity(), "Account Changed Successfully", Toast.LENGTH_SHORT).show();
+                                                    prefEditor.putString("username", username);
+                                                    prefEditor.putString("password", password);
+                                                    prefEditor.putString("fullname", fullname);
+                                                    prefEditor.putString("phone", phone);
+                                                    prefEditor.putString("email", email);
                                                     prefEditor.commit();
 
-                                                    MemberSessionActivity memberSessionActivity = (MemberSessionActivity) getActivity();
-                                                    memberSessionActivity.headUserName.setText(preferences.getString("fullname",""));
+                                                    CoachSessionActivity sessionActivity = (CoachSessionActivity) getActivity();
+                                                    sessionActivity.headUserName.setText(preferences.getString("fullname", ""));
 
                                                 }
                                             })
                                             .addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(getActivity(),"Account Changing Failed. Please Try Again",Toast.LENGTH_SHORT).show();
-                                                    Log.e("FAILED SIGNUP",""+e.getMessage().toString().trim());
+                                                    Toast.makeText(getActivity(), "Account Changing Failed. Please Try Again", Toast.LENGTH_SHORT).show();
+                                                    Log.e("FAILED SIGNUP", "" + e.getMessage().toString().trim());
                                                 }
                                             });
                                 }
@@ -242,8 +239,8 @@ public class AccountFragment extends Fragment {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Log.e("FIREBASE ERROR",""+ error.getMessage());
-                        Toast.makeText(getActivity(),"Account Changing Failed. Please Try Again",Toast.LENGTH_SHORT).show();
+                        Log.e("FIREBASE ERROR", "" + error.getMessage());
+                        Toast.makeText(getActivity(), "Account Changing Failed. Please Try Again", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -252,6 +249,24 @@ public class AccountFragment extends Fragment {
 
         return view;
     }
+    
+    private void resetAllFieldsByDefault() {
+        clearAllFieldValidations();
+        fullnameField.setText(preferences.getString("fullname",""));
+        emailField.setText(preferences.getString("email",""));
+        phoneField.setText(preferences.getString("phone",""));
+        usernameField.setText(preferences.getString("username",""));
+        passwordField.setText(preferences.getString("password",""));
+    }
+
+    private Boolean checkIfFieldsAreSame() {
+        return fullname.equals(preferences.getString("fullname","")) &&
+                email.equals(preferences.getString("email","")) &&
+                phone.equals(preferences.getString("phone","")) &&
+                username.equals(preferences.getString("username","")) &&
+                password.equals(preferences.getString("password",""));
+    }
+
 
     private void clearAllFieldValidations() {
         fullnameField.setError(null);
@@ -260,4 +275,6 @@ public class AccountFragment extends Fragment {
         usernameField.setError(null);
         passwordField.setError(null);
     }
+    
+    
 }

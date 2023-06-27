@@ -3,15 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Sessions.GymCoaches.pages.Account.AccountFragment">
+    android:layout_height="match_parent">
 
 
     <TextView
-        android:id="@+id/coach_account_textview_coach_of"
+        android:id="@+id/employee_account_textview_employee_of"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="COACH OF"
+        android:text="EMPLOYEE OF"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,7 +20,7 @@
         app:layout_constraintVertical_bias="0.07" />
 
     <TextView
-        android:id="@+id/coach_account_textview_gym_name"
+        android:id="@+id/employee_account_textview_gym_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Gym Name"
@@ -29,25 +28,25 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/coach_account_textview_coach_of"
+        app:layout_constraintTop_toBottomOf="@id/employee_account_textview_employee_of"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintVertical_bias="0.01" />
 
     <TextView
-        android:id="@+id/coach_account_textview_gym_address"
+        android:id="@+id/employee_account_textview_gym_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tagbilaran, Bohol"
+        android:text=""
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/coach_account_textview_gym_name"
+        app:layout_constraintTop_toBottomOf="@id/employee_account_textview_gym_name"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintVertical_bias="0.01" />
 
     <EditText
-        android:id="@+id/coach_account_update_field_fullname"
+        android:id="@+id/employee_account_update_field_fullname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -55,12 +54,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/coach_account_textview_gym_address"
+        app:layout_constraintTop_toBottomOf="@id/employee_account_textview_gym_address"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintVertical_bias="0.04"   />
 
     <EditText
-        android:id="@+id/coach_account_update_field_email"
+        android:id="@+id/employee_account_update_field_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -71,13 +70,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/coach_account_update_field_fullname"
+        app:layout_constraintTop_toBottomOf="@id/employee_account_update_field_fullname"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintVertical_bias="0.04"  />
 
 
     <EditText
-        android:id="@+id/coach_account_update_field_phone"
+        android:id="@+id/employee_account_update_field_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -88,12 +87,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/coach_account_update_field_email"
+        app:layout_constraintTop_toBottomOf="@id/employee_account_update_field_email"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintVertical_bias="0.05"  />
 
     <EditText
-        android:id="@+id/coach_account_update_field_username"
+        android:id="@+id/employee_account_update_field_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -103,13 +102,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/coach_account_update_field_phone"
+        app:layout_constraintTop_toBottomOf="@id/employee_account_update_field_phone"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintVertical_bias="0.06"  />
 
 
     <EditText
-        android:id="@+id/coach_account_update_field_password"
+        android:id="@+id/employee_account_update_field_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -120,34 +119,48 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/coach_account_update_field_username"
+        app:layout_constraintTop_toBottomOf="@id/employee_account_update_field_username"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintVertical_bias="0.07"  />
 
 
     <Button
-        android:id="@+id/coach_account_update_button_submit"
+        android:id="@+id/employee_account_update_button_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/purple_200"
-        android:text="Update Account"
+        android:text="Update"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coach_account_update_field_password"
-        app:layout_constraintVertical_bias="0.397"/>
+        app:layout_constraintTop_toBottomOf="@+id/employee_account_update_field_password"
+        app:layout_constraintVertical_bias="0.197"/>
+
+    <Button
+        android:id="@+id/employee_account_update_button_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/purple_200"
+        android:text="Reset Fields"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/employee_account_update_button_submit"
+        app:layout_constraintVertical_bias="0.197"/>
 
     <CheckBox
-        android:id="@+id/coach_account_update_checkbox_password"
+        android:id="@+id/employee_account_update_checkbox_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/coach_account_update_field_password"
-        app:layout_constraintTop_toBottomOf="@+id/coach_account_update_field_username"
+        app:layout_constraintStart_toEndOf="@+id/employee_account_update_field_password"
+        app:layout_constraintTop_toBottomOf="@+id/employee_account_update_field_username"
         app:layout_constraintVertical_bias="0.054" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

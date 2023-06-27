@@ -1,6 +1,7 @@
 package com.domzky.gymbooking.Sessions.GymOwner.pages.StaffsList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,23 +13,30 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.domzky.gymbooking.Helpers.Users.GymStaff;
 import com.domzky.gymbooking.R;
+import com.domzky.gymbooking.Sessions.GymOwner.pages.StaffsList.ModifyStaff.ModifyStaffActivity;
 
 import java.util.List;
 
 public class StaffListAdapter extends RecyclerView.Adapter<StaffListAdapter.ViewHolder> {
 
     public List<GymStaff> list;
-    public Context context;
+    public Context wholeContext;
+
     public StaffListAdapter(List<GymStaff> list) {
         this.list = list;
+    }
+
+    public StaffListAdapter(List<GymStaff> list,Context wholeContext) {
+        this.list = list;
+        this.wholeContext = wholeContext;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView staff_fullname,staff_active;
 
-        public ViewHolder(View itenView) {
-            super(itenView);
+        public ViewHolder(View itemView) {
+            super(itemView);
 
             staff_fullname = itemView.findViewById(R.id.staff_item_fullname);
             staff_active = itemView.findViewById(R.id.staff_item_activated);
@@ -60,6 +68,22 @@ public class StaffListAdapter extends RecyclerView.Adapter<StaffListAdapter.View
             holder.staff_active.setText("ACCOUNT INACTIVE");
             holder.staff_active.setTextColor(Color.RED);
         }
+        
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                wholeContext.startActivity(new Intent(wholeContext, ModifyStaffActivity.class)
+                        .putExtra("staffuid",staff.uid)
+                        .putExtra("gymuid",staff.gym_id)
+                        .putExtra("stafffullname",staff.fullname)
+                        .putExtra("staffemail",staff.email)
+                        .putExtra("staffphone",staff.phone)
+                        .putExtra("staffusername",staff.username)
+                        .putExtra("staffpassword",staff.password)
+                        .putExtra("staffactivated",staff.activated)
+                );
+            }
+        });
 
     }
 

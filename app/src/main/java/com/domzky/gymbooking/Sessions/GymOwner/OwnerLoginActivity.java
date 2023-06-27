@@ -95,6 +95,7 @@ public class OwnerLoginActivity extends AppCompatActivity {
                         DataSnapshot snapshot = snap.child("Users").child("Owners");
                         DataSnapshot snapGym = snap.child("Gyms");
                         String uid = loginGetUid(snapshot,username,password);
+                        progress.dismiss();
                         if (uid==null) {
                             Toast.makeText(getApplicationContext(), "Invalid Username or Password", Toast.LENGTH_SHORT).show();
                             Log.d("BAWAL",username + ":" + password +" - Login Failed");
@@ -121,8 +122,8 @@ public class OwnerLoginActivity extends AppCompatActivity {
 
                             startActivity(new Intent(OwnerLoginActivity.this, OwnerSessionActivity.class));
                             finishAffinity();
+                            return;
                         }
-                        progress.dismiss();
                     }
 
                     @Override

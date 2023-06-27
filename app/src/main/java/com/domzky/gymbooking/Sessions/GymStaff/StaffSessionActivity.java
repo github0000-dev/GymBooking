@@ -2,6 +2,7 @@ package com.domzky.gymbooking.Sessions.GymStaff;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,10 +31,18 @@ public class StaffSessionActivity extends AppCompatActivity implements Navigatio
     private NavigationView navigationView;
     private Toolbar toolbar;
 
+
+    public TextView headUserName;
+
+    private SharedPreferences preferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_session);
+
+
+        preferences = getSharedPreferences("staff",MODE_PRIVATE);
 
         // Setting my component hooks
         drawerLayout = findViewById(R.id.drawerlayout);
@@ -61,9 +70,9 @@ public class StaffSessionActivity extends AppCompatActivity implements Navigatio
 
         // Set navigation header values
         View headerView = navigationView.getHeaderView(0);
-        TextView headUserName = headerView.findViewById(R.id.nav_account_name);
+        headUserName = headerView.findViewById(R.id.nav_account_name);
         TextView headUserType = headerView.findViewById(R.id.nav_account_type);
-        headUserName.setText("Phil Adlaon");
+        headUserName.setText(preferences.getString("fullname",""));
         headUserType.setText("Staff");
 
 

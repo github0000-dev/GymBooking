@@ -1,6 +1,7 @@
 package com.domzky.gymbooking.Sessions.GymOwner.pages.CoachesList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,24 +12,31 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.domzky.gymbooking.Helpers.Users.GymCoach;
+import com.domzky.gymbooking.Helpers.Users.GymStaff;
 import com.domzky.gymbooking.R;
+import com.domzky.gymbooking.Sessions.GymOwner.pages.StaffsList.ModifyStaff.ModifyStaffActivity;
 
 import java.util.List;
 
 public class CoachListAdapter extends RecyclerView.Adapter<CoachListAdapter.ViewHolder> {
 
     public List<GymCoach> list;
-    public Context context;
+    public Context wholeContext;
+
     public CoachListAdapter(List<GymCoach> list) {
         this.list = list;
+    }
+    public CoachListAdapter(List<GymCoach> list, Context wholeContext) {
+        this.list = list;
+        this.wholeContext = wholeContext;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView coach_fullname,coach_active;
 
-        public ViewHolder(View itenView) {
-            super(itenView);
+        public ViewHolder(View itemView) {
+            super(itemView);
 
             coach_fullname = itemView.findViewById(R.id.coach_item_fullname);
             coach_active = itemView.findViewById(R.id.coach_item_activated);
@@ -60,6 +68,22 @@ public class CoachListAdapter extends RecyclerView.Adapter<CoachListAdapter.View
             holder.coach_active.setText("ACCOUNT INACTIVE");
             holder.coach_active.setTextColor(Color.RED);
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                wholeContext.startActivity(new Intent(wholeContext, ModifyStaffActivity.class)
+                        .putExtra("coachuid",coach.uid)
+                        .putExtra("gymuid",coach.gym_id)
+                        .putExtra("coachfullname",coach.fullname)
+                        .putExtra("coachemail",coach.email)
+                        .putExtra("coachphone",coach.phone)
+                        .putExtra("coachusername",coach.username)
+                        .putExtra("coachpassword",coach.password)
+                        .putExtra("coachactivated",coach.activated)
+                );
+            }
+        });
 
     }
 

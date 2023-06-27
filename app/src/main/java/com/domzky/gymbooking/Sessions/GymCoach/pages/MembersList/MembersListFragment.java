@@ -1,4 +1,4 @@
-package com.domzky.gymbooking.Sessions.GymCoaches.pages.MembersList;
+package com.domzky.gymbooking.Sessions.GymCoach.pages.MembersList;
 
 import android.os.Bundle;
 

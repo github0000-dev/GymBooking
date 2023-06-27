@@ -10,13 +10,10 @@ import android.widget.Button;
 
 import com.domzky.gymbooking.R;
 import com.domzky.gymbooking.Sessions.Admin.AdminLoginActivity;
-import com.domzky.gymbooking.Sessions.Admin.AdminSessionActivity;
-import com.domzky.gymbooking.Sessions.GymCoaches.CoachSessionActivity;
+import com.domzky.gymbooking.Sessions.GymCoach.CoachLoginActivity;
 import com.domzky.gymbooking.Sessions.GymOwner.OwnerLoginActivity;
-import com.domzky.gymbooking.Sessions.GymOwner.OwnerSessionActivity;
-import com.domzky.gymbooking.Sessions.GymStaff.StaffSessionActivity;
+import com.domzky.gymbooking.Sessions.GymStaff.StaffLoginActivity;
 import com.domzky.gymbooking.Sessions.Members.MemberLoginActivity;
-import com.domzky.gymbooking.Sessions.Members.MemberSessionActivity;
 
 public class UsersActivity extends AppCompatActivity {
 
@@ -53,14 +50,14 @@ public class UsersActivity extends AppCompatActivity {
         btn_coach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(UsersActivity.this, CoachSessionActivity.class));
+                startActivity(new Intent(UsersActivity.this, CoachLoginActivity.class));
             }
         });
 
         btn_staff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(UsersActivity.this, StaffSessionActivity.class));
+                startActivity(new Intent(UsersActivity.this, StaffLoginActivity.class));
             }
         });
 

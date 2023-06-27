@@ -13,6 +13,42 @@
         android:theme="@style/Theme.GymBooking"
         tools:targetApi="31">
         <activity
+            android:name=".Sessions.GymOwner.pages.CoachesList.AddCoach.AddCoachActivity"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".Sessions.GymOwner.OwnerSessionActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Sessions.GymOwner.pages.CoachesList.ModifyCoach.ModifyCoachActivity"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".Sessions.GymOwner.OwnerSessionActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Sessions.GymOwner.pages.StaffsList.ModifyStaff.ModifyStaffActivity"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".Sessions.GymOwner.OwnerSessionActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Sessions.GymOwner.pages.StaffsList.AddStaff.AddStaffActivity"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".Sessions.GymOwner.OwnerSessionActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Sessions.Admin.AdminSignupActivity"
             android:exported="false">
             <meta-data
@@ -35,6 +71,8 @@
         </activity>
         <activity
             android:name=".Sessions.Admin.pages.GymsList.ModifyGym.ModifyGymActivity"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".Sessions.Admin.AdminSessionActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -51,6 +89,7 @@
         </activity>
         <activity
             android:name=".Sessions.UsersActivity"
+            android:launchMode="singleInstance"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -58,68 +97,68 @@
         </activity>
         <activity
             android:name=".Sessions.GymOwner.OwnerSessionActivity"
-            android:launchMode="singleInstance"
-            android:exported="false">
+            android:exported="false"
+            android:launchMode="singleInstance">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Sessions.GymCoaches.CoachSessionActivity"
-            android:launchMode="singleInstance"
-            android:exported="false">
+            android:name=".Sessions.GymCoach.CoachSessionActivity"
+            android:exported="false"
+            android:launchMode="singleInstance">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".Sessions.GymStaff.StaffSessionActivity"
-            android:launchMode="singleInstance"
-            android:exported="false">
+            android:exported="false"
+            android:launchMode="singleInstance">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".Sessions.Members.MemberSessionActivity"
-            android:launchMode="singleInstance"
-            android:exported="false">
+            android:exported="false"
+            android:launchMode="singleInstance">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".Sessions.Members.MemberLoginActivity"
+            android:exported="false"
             android:launchMode="singleInstance"
-            android:parentActivityName=".Sessions.UsersActivity"
-            android:exported="false">
+            android:parentActivityName=".Sessions.UsersActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".Sessions.GymStaff.StaffLoginActivity"
+            android:exported="false"
             android:launchMode="singleInstance"
-            android:parentActivityName=".Sessions.UsersActivity"
-            android:exported="false">
+            android:parentActivityName=".Sessions.UsersActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Sessions.GymCoaches.CoachLoginActivity"
+            android:name=".Sessions.GymCoach.CoachLoginActivity"
+            android:exported="false"
             android:launchMode="singleInstance"
-            android:parentActivityName=".Sessions.UsersActivity"
-            android:exported="false">
+            android:parentActivityName=".Sessions.UsersActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".Sessions.GymOwner.OwnerLoginActivity"
+            android:exported="false"
             android:launchMode="singleInstance"
-            android:parentActivityName=".Sessions.UsersActivity"
-            android:exported="false">
+            android:parentActivityName=".Sessions.UsersActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -133,8 +172,8 @@
         </activity>
         <activity
             android:name=".Sessions.Admin.AdminSessionActivity"
-            android:launchMode="singleInstance"
-            android:exported="false">
+            android:exported="false"
+            android:launchMode="singleInstance">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
