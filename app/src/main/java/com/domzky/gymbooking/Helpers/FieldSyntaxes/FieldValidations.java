@@ -84,4 +84,17 @@ public class FieldValidations {
         }
         return false;
     }
+
+    public boolean isMembershipNameExists(DataSnapshot snapshot,String name,String gym_id) {
+        for (DataSnapshot snap : snapshot.getChildren()) {
+            if (snap.child("name").getValue(String.class).equals(name)
+                    && !snap.child("deleted").getValue(Boolean.class)
+                    && snap.child("gym_id").getValue(String.class).equals(gym_id)
+            ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

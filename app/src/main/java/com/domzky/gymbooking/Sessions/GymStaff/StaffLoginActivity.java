@@ -20,6 +20,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.domzky.gymbooking.Helpers.Firebase.FirebaseHelper;
 import com.domzky.gymbooking.R;
+import com.domzky.gymbooking.Sessions.DeactivationActivity;
+import com.domzky.gymbooking.Sessions.GymCoach.CoachLoginActivity;
+import com.domzky.gymbooking.Sessions.GymCoach.CoachSessionActivity;
 import com.domzky.gymbooking.Sessions.GymStaff.StaffLoginActivity;
 import com.domzky.gymbooking.Sessions.GymStaff.StaffSessionActivity;
 import com.google.firebase.database.DataSnapshot;
@@ -123,7 +126,15 @@ public class StaffLoginActivity extends AppCompatActivity {
 
                             Log.d("PASOK",username + ":" + password +" - Login SUCCESS");
 
-                            startActivity(new Intent(StaffLoginActivity.this, StaffSessionActivity.class));
+                            if (snapshot.child(uid).child("activated").getValue(Boolean.class)) {
+                                startActivity(new Intent(StaffLoginActivity.this, StaffSessionActivity.class));
+                            } else {
+                                startActivity(new Intent(StaffLoginActivity.this, DeactivationActivity.class)
+                                        .putExtra("UserType","Staff")
+                                );
+                            }
+
+//                            startActivity(new Intent(StaffLoginActivity.this, StaffSessionActivity.class));
                             finishAffinity();
                         }
                     }

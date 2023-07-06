@@ -20,6 +20,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.domzky.gymbooking.Helpers.Firebase.FirebaseHelper;
 import com.domzky.gymbooking.R;
+import com.domzky.gymbooking.Sessions.DeactivationActivity;
+import com.domzky.gymbooking.Sessions.GymOwner.OwnerLoginActivity;
+import com.domzky.gymbooking.Sessions.GymOwner.OwnerSessionActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -122,7 +125,15 @@ public class CoachLoginActivity extends AppCompatActivity {
 
                             Log.d("PASOK",username + ":" + password +" - Login SUCCESS");
 
-                            startActivity(new Intent(CoachLoginActivity.this, CoachSessionActivity.class));
+                            if (snapshot.child(uid).child("activated").getValue(Boolean.class)) {
+                                startActivity(new Intent(CoachLoginActivity.this, CoachSessionActivity.class));
+                            } else {
+                                startActivity(new Intent(CoachLoginActivity.this, DeactivationActivity.class)
+                                        .putExtra("UserType","Owner")
+                                );
+                            }
+
+//                            startActivity(new Intent(CoachLoginActivity.this, CoachSessionActivity.class));
                             finishAffinity();
                         }
                     }

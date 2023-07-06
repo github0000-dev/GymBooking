@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.domzky.gymbooking.Helpers.Firebase.FirebaseHelper;
 import com.domzky.gymbooking.R;
+import com.domzky.gymbooking.Sessions.DeactivationActivity;
 import com.domzky.gymbooking.Sessions.Members.MemberLoginActivity;
 import com.domzky.gymbooking.Sessions.Members.MemberSessionActivity;
 import com.domzky.gymbooking.Sessions.Members.MemberSignupActivity;
@@ -120,7 +121,13 @@ public class OwnerLoginActivity extends AppCompatActivity {
 
                             Log.d("PASOK",username + ":" + password +" - Login SUCCESS");
 
-                            startActivity(new Intent(OwnerLoginActivity.this, OwnerSessionActivity.class));
+                            if (snapGym.child(uid).child("gym_activated").getValue(Boolean.class)) {
+                                startActivity(new Intent(OwnerLoginActivity.this, OwnerSessionActivity.class));
+                            } else {
+                                startActivity(new Intent(OwnerLoginActivity.this, DeactivationActivity.class)
+                                        .putExtra("UserType","Owner")
+                                );
+                            }
                             finishAffinity();
                             return;
                         }

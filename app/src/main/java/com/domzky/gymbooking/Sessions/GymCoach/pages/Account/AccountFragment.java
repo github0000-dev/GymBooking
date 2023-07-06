@@ -85,6 +85,10 @@ public class AccountFragment extends Fragment {
         usernameField = view.findViewById(R.id.employee_account_update_field_username);
         passwordField = view.findViewById(R.id.employee_account_update_field_password);
 
+        fullnameField.setEnabled(false);
+        emailField.setEnabled(false);
+        phoneField.setEnabled(false);
+
         updateBtn = view.findViewById(R.id.employee_account_update_button_submit);
         resetBtn = view.findViewById(R.id.employee_account_update_button_reset);
         showPassword = view.findViewById(R.id.employee_account_update_checkbox_password);

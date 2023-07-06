@@ -231,12 +231,14 @@ public class ModifyGymActivity extends AppCompatActivity {
                             builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
+                                    progress.show();
                                     fgym.child(uid).setValue(new Gym(gymname,gymaddress,gymactivated,gymstatus));
                                     fowner.child(uid).setValue(new GymOwner(ownername,owneremail,ownerphoneNum,ownerusername,ownerpassword))
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     Toast.makeText(getApplicationContext(),"Modified Successfully",Toast.LENGTH_SHORT).show();
+                                                    progress.dismiss();
                                                     finish();
                                                 }
                                             })

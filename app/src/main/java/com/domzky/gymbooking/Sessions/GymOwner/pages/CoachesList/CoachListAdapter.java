@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.domzky.gymbooking.Helpers.Users.GymCoach;
 import com.domzky.gymbooking.Helpers.Users.GymStaff;
 import com.domzky.gymbooking.R;
+import com.domzky.gymbooking.Sessions.GymOwner.pages.CoachesList.ModifyCoach.ModifyCoachActivity;
 import com.domzky.gymbooking.Sessions.GymOwner.pages.StaffsList.ModifyStaff.ModifyStaffActivity;
 
 import java.util.List;
@@ -72,7 +73,7 @@ public class CoachListAdapter extends RecyclerView.Adapter<CoachListAdapter.View
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                wholeContext.startActivity(new Intent(wholeContext, ModifyStaffActivity.class)
+                wholeContext.startActivity(new Intent(wholeContext, ModifyCoachActivity.class)
                         .putExtra("coachuid",coach.uid)
                         .putExtra("gymuid",coach.gym_id)
                         .putExtra("coachfullname",coach.fullname)

@@ -20,8 +20,7 @@ import com.domzky.gymbooking.R;
 import com.domzky.gymbooking.Sessions.GymOwner.pages.Account.AccountFragment;
 import com.domzky.gymbooking.Sessions.GymOwner.pages.CoachesList.CoachesListFragment;
 import com.domzky.gymbooking.Sessions.GymOwner.pages.Dashboard.DashboardFragment;
-import com.domzky.gymbooking.Sessions.GymOwner.pages.MemberList.MembersListFragment;
-import com.domzky.gymbooking.Sessions.GymOwner.pages.Membership.MembershipFragment;
+import com.domzky.gymbooking.Sessions.GymOwner.pages.Membership.MembershipListFragment;
 import com.domzky.gymbooking.Sessions.GymOwner.pages.StaffsList.StaffsListFragment;
 import com.domzky.gymbooking.Sessions.GymOwner.pages.TasksList.TasksListFragment;
 import com.domzky.gymbooking.Sessions.UsersActivity;
@@ -110,16 +109,13 @@ public class OwnerSessionActivity extends AppCompatActivity implements Navigatio
                 changeFragmentMenu(new TasksListFragment(),item.toString());
                 break;
             case R.id.owner_menu_membership:
-                changeFragmentMenu(new MembershipFragment(),item.toString());
+                changeFragmentMenu(new MembershipListFragment(),item.toString());
                 break;
             case R.id.owner_menu_coaches:
                 changeFragmentMenu(new CoachesListFragment(),item.toString());
                 break;
             case R.id.owner_menu_staffs:
                 changeFragmentMenu(new StaffsListFragment(),item.toString());
-                break;
-            case R.id.owner_menu_members:
-                changeFragmentMenu(new MembersListFragment(),item.toString());
                 break;
             case R.id.owner_menu_account:
                 changeFragmentMenu(new AccountFragment(),item.toString());

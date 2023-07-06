@@ -2,6 +2,7 @@ package com.domzky.gymbooking.Sessions.Admin.pages.GymsList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,8 +59,16 @@ public class GymsListAdapter extends RecyclerView.Adapter<GymsListAdapter.ViewHo
         Gym gym = list.get(position);
 
         holder.gymname.setText(gym.gym_name.toUpperCase(Locale.ROOT));
-        holder.fullname.setText(gym.owner.fullname);
-        holder.gymaddress.setText(gym.gym_address);
+
+        if (gym.gym_activated) {
+            holder.gymaddress.setText("Gym Active".toUpperCase(Locale.ROOT));
+            holder.gymaddress.setTextColor(Color.GREEN);
+        } else {
+            holder.gymaddress.setText("Gym Inactive".toUpperCase(Locale.ROOT));
+            holder.gymaddress.setTextColor(Color.RED);
+        }
+
+        holder.fullname.setText(gym.gym_address);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

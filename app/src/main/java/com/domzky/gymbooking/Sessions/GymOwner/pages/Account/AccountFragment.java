@@ -26,11 +26,9 @@ import android.widget.Toast;
 import com.domzky.gymbooking.Helpers.FieldSyntaxes.FieldValidations;
 import com.domzky.gymbooking.Helpers.Firebase.FirebaseHelper;
 import com.domzky.gymbooking.Helpers.Users.Gym;
-import com.domzky.gymbooking.Helpers.Users.GymMember;
 import com.domzky.gymbooking.Helpers.Users.GymOwner;
 import com.domzky.gymbooking.R;
 import com.domzky.gymbooking.Sessions.GymOwner.OwnerSessionActivity;
-import com.domzky.gymbooking.Sessions.Members.MemberSessionActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -54,7 +52,7 @@ public class AccountFragment extends Fragment {
     private Boolean gymactivated,gymstatus;
 
     private ProgressDialog progress;
-    
+
     private SharedPreferences preferences;
     private SharedPreferences.Editor prefEditor;
 
@@ -79,6 +77,12 @@ public class AccountFragment extends Fragment {
         phoneField = view.findViewById(R.id.owner_account_update_field_phone);
         usernameField = view.findViewById(R.id.owner_account_update_field_username);
         passwordField = view.findViewById(R.id.owner_account_update_field_password);
+
+        gymnameField.setEnabled(false);
+        gymaddressField.setEnabled(false);
+        fullnameField.setEnabled(false);
+        emailField.setEnabled(false);
+        phoneField.setEnabled(false);
 
         updateBtn = view.findViewById(R.id.owner_account_update_button_submit);
         resetBtn = view.findViewById(R.id.owner_account_update_button_reset);

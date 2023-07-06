@@ -1,4 +1,4 @@
-package com.domzky.gymbooking.Sessions.GymOwner.pages.Membership;
+package com.domzky.gymbooking.Sessions.Members.pages.Sessions;
 
 import android.os.Bundle;
 
@@ -10,12 +10,14 @@ import android.view.ViewGroup;
 
 import com.domzky.gymbooking.R;
 
-public class MembershipFragment extends Fragment {
+public class SessionsFragment extends Fragment {
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_owner_membership, container, false);
+        View view = inflater.inflate(R.layout.fragment_member_sessions, container, false);
 
 
 

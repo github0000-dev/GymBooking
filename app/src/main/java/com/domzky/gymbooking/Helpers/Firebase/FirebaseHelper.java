@@ -27,6 +27,10 @@ public class FirebaseHelper {
         return ref.child("Users").child(usertype);
     }
 
+    public DatabaseReference getMembershipReference () {
+        return ref.child("Memberships");
+    }
+
 
 
 }
