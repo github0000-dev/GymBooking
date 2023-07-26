@@ -116,7 +116,7 @@ public class AddMembershipActivity extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Log.e("FIREBASE ERROR",""+ e.getMessage());
-                                Toast.makeText(getBaseContext(),"Membership Changing Failed. Please Try Again",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getBaseContext(),"Membership Adding Failed. Please Try Again",Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -126,7 +126,7 @@ public class AddMembershipActivity extends AppCompatActivity {
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                         Log.e("FIREBASE ERROR",""+ error.getMessage());
-                        Toast.makeText(getBaseContext(),"Membership Changing Failed. Please Try Again",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(),"Membership Adding Failed. Please Try Again",Toast.LENGTH_SHORT).show();
                     }
                 });
 

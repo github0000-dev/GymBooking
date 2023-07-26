@@ -65,6 +65,7 @@ public class ModifyMembershipActivity extends AppCompatActivity {
         progress.setMessage("Updating Membership");
 
         banner = findViewById(R.id.membership_form_banner);
+        banner.setText("Add Program Form");
 
         nameField = findViewById(R.id.membership_form_field_name);
         priceField = findViewById(R.id.membership_form_field_price);
@@ -133,7 +134,6 @@ public class ModifyMembershipActivity extends AppCompatActivity {
                         builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                dbwrite.child(reset_uid).removeValue();
                                 dbwrite.child(reset_uid).setValue(new Membership(
                                         name,
                                         preferences.getString("userid",""),

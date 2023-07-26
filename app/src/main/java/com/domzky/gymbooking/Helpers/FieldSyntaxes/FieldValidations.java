@@ -96,5 +96,17 @@ public class FieldValidations {
         }
         return false;
     }
+    public boolean isProgramNameExists(DataSnapshot snapshot,String name,String coach_id) {
+        for (DataSnapshot snap : snapshot.getChildren()) {
+            if (snap.child("name").getValue(String.class).equals(name)
+                    && !snap.child("deleted").getValue(Boolean.class)
+                    && snap.child("coach_id").getValue(String.class).equals(coach_id)
+            ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }

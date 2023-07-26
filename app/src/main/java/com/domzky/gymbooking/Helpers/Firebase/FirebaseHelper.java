@@ -31,6 +31,8 @@ public class FirebaseHelper {
         return ref.child("Memberships");
     }
 
-
+    public DatabaseReference getProgramReference () {
+        return ref.child("Programs");
+    }
 
 }

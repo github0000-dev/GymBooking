@@ -1,12 +1,10 @@
 package com.domzky.gymbooking.Sessions.Members;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,6 +19,7 @@ import com.domzky.gymbooking.R;
 import com.domzky.gymbooking.Sessions.Members.pages.Account.AccountFragment;
 import com.domzky.gymbooking.Sessions.GymStaff.pages.AboutGym.AboutGymFragment;
 import com.domzky.gymbooking.Sessions.Members.pages.CoachesList.CoachesListFragment;
+import com.domzky.gymbooking.Sessions.Members.pages.Dashboard.GymsListFragment;
 import com.domzky.gymbooking.Sessions.Members.pages.Programs.ProgramsFragment;
 import com.domzky.gymbooking.Sessions.UsersActivity;
 import com.google.android.material.navigation.NavigationView;
@@ -62,7 +61,7 @@ public class MemberSessionActivity extends AppCompatActivity implements Navigati
         navigationView.bringToFront();
 
         // Set an initialized fragment when the menu activity starts to open
-        changeFragmentMenu(new ProgramsFragment(),navigationView.getMenu().getItem(0).toString());
+        changeFragmentMenu(new GymsListFragment(),navigationView.getMenu().getItem(0).toString());
 
         // Initialize highlighted menu item when the menu activity starts to open
         navigationView.setCheckedItem(navigationView.getMenu().getItem(0).getItemId());
@@ -100,6 +99,9 @@ public class MemberSessionActivity extends AppCompatActivity implements Navigati
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()) {
+            case R.id.member_menu_dashboard:
+                changeFragmentMenu(new GymsListFragment(),item.toString());
+                break;
             case R.id.member_menu_programs:
                 changeFragmentMenu(new ProgramsFragment(),item.toString());
                 break;
@@ -116,7 +118,7 @@ public class MemberSessionActivity extends AppCompatActivity implements Navigati
                 logOutSessionFunction();
                 break;
             default:
-                changeFragmentMenu(new ProgramsFragment(),item.toString());
+                changeFragmentMenu(new GymsListFragment(),item.toString());
                 break;
         }
 

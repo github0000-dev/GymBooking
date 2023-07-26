@@ -129,7 +129,7 @@ public class CoachLoginActivity extends AppCompatActivity {
                                 startActivity(new Intent(CoachLoginActivity.this, CoachSessionActivity.class));
                             } else {
                                 startActivity(new Intent(CoachLoginActivity.this, DeactivationActivity.class)
-                                        .putExtra("UserType","Owner")
+                                        .putExtra("UserType","Coach")
                                 );
                             }
 
