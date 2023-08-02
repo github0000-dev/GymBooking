@@ -107,6 +107,15 @@ public class MemberLoginActivity extends AppCompatActivity {
                             editor.putString("fullname",snapshot.child(uid).child("fullname").getValue(String.class));
                             editor.putString("phone",snapshot.child(uid).child("phone").getValue(String.class));
                             editor.putString("email",snapshot.child(uid).child("email").getValue(String.class));
+
+                            if (snapshot.child(uid).child("Membership").exists()) {
+                                editor.putString("member_type","Member");
+                                editor.putString("gym_id",snapshot.child(uid).child("Membership").child("gym_id").getValue(String.class));
+                                editor.putString("membership_id",snapshot.child(uid).child("Membership").child("membership_id").getValue(String.class));
+                            } else {
+                                editor.putString("member_type","Guest");
+                            }
+
                             editor.commit();
 
                             logSession();

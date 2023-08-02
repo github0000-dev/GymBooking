@@ -1,4 +1,4 @@
-package com.domzky.gymbooking.Sessions.GymCoach.pages.Programs;
+package com.domzky.gymbooking.Sessions.GymCoach.pages.Exercises;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -16,9 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.domzky.gymbooking.Helpers.Firebase.FirebaseHelper;
-import com.domzky.gymbooking.Helpers.Things.Program;
+import com.domzky.gymbooking.Helpers.Things.Exercises;
 import com.domzky.gymbooking.R;
-import com.domzky.gymbooking.Sessions.GymCoach.pages.Programs.AddProgram.AddProgramActivity;
+import com.domzky.gymbooking.Sessions.GymCoach.pages.Exercises.AddExercise.AddExerciseActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,11 +31,11 @@ import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class ProgramsFragment extends Fragment {
+public class ExercisesFragment extends Fragment {
 
-    private List<Program> list;
+    private List<Exercises> list;
 
-    private DatabaseReference db = new FirebaseHelper().getProgramReference();
+    private DatabaseReference db = new FirebaseHelper().getExerciseReference();
 
     private SharedPreferences preferences;
     private RecyclerView recview;
@@ -45,19 +45,19 @@ public class ProgramsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_coach_programs, container, false);
+        View view = inflater.inflate(R.layout.fragment_coach_exercises, container, false);
 
         preferences = getActivity().getSharedPreferences("coach",MODE_PRIVATE);
 
         list = new ArrayList<>();
 
-        recview = view.findViewById(R.id.coach_menu_program_recview);
-        addBtn = view.findViewById(R.id.coach_program_list_add_fab);
+        recview = view.findViewById(R.id.coach_menu_exercise_recview);
+        addBtn = view.findViewById(R.id.coach_exercise_list_add_fab);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(),AddProgramActivity.class));
+                startActivity(new Intent(getActivity(), AddExerciseActivity.class));
             }
         });
 
@@ -70,7 +70,7 @@ public class ProgramsFragment extends Fragment {
                             snap.child("coach_id").getValue(String.class).equals(preferences.getString("userid",""))
                             && !snap.child("deleted").getValue(Boolean.class)
                     ) {
-                        list.add(new Program(
+                        list.add(new Exercises(
                                 snap.getKey(),
                                 snap.child("coach_id").getValue(String.class),
                                 snap.child("name").getValue(String.class),
@@ -79,7 +79,7 @@ public class ProgramsFragment extends Fragment {
                         ));
                     }
                 }
-                recview.setAdapter(new ProgramsAdapter(list,getActivity()));
+                recview.setAdapter(new ExercisesAdapter(list,getActivity()));
                 recview.setLayoutManager(new LinearLayoutManager(getContext()));
             }
             @Override
@@ -89,7 +89,7 @@ public class ProgramsFragment extends Fragment {
         });
 
 //
-//        recview.setAdapter(new ProgramsAdapter(list));
+//        recview.setAdapter(new ExercisesAdapter(list));
 //        recview.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return view;

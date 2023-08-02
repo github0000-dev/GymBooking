@@ -19,7 +19,7 @@ import com.domzky.gymbooking.R;
 import com.domzky.gymbooking.Sessions.GymCoach.pages.AboutGym.AboutGymFragment;
 import com.domzky.gymbooking.Sessions.GymCoach.pages.Account.AccountFragment;
 import com.domzky.gymbooking.Sessions.GymCoach.pages.MembersList.MembersListFragment;
-import com.domzky.gymbooking.Sessions.GymCoach.pages.Programs.ProgramsFragment;
+import com.domzky.gymbooking.Sessions.GymCoach.pages.Exercises.ExercisesFragment;
 import com.domzky.gymbooking.Sessions.UsersActivity;
 import com.google.android.material.navigation.NavigationView;
 
@@ -59,7 +59,7 @@ public class CoachSessionActivity extends AppCompatActivity implements Navigatio
         navigationView.bringToFront();
 
         // Set an initialized fragment when the menu activity starts to open
-        changeFragmentMenu(new ProgramsFragment(),navigationView.getMenu().getItem(0).toString());
+        changeFragmentMenu(new ExercisesFragment(),navigationView.getMenu().getItem(0).toString());
 
         // Initialize highlighted menu item when the menu activity starts to open
         navigationView.setCheckedItem(navigationView.getMenu().getItem(0).getItemId());
@@ -89,17 +89,18 @@ public class CoachSessionActivity extends AppCompatActivity implements Navigatio
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
+//        else {
+//            super.onBackPressed();
+//        }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.coach_menu_programs:
-                changeFragmentMenu(new ProgramsFragment(),item.toString());
+            case R.id.coach_menu_exercises:
+                changeFragmentMenu(new ExercisesFragment(),item.toString());
                 break;
             case R.id.coach_menu_account:
                 changeFragmentMenu(new AccountFragment(),item.toString());
@@ -114,7 +115,7 @@ public class CoachSessionActivity extends AppCompatActivity implements Navigatio
                 logOutSessionFunction();
                 break;
             default:
-                changeFragmentMenu(new ProgramsFragment(),item.toString());
+                changeFragmentMenu(new ExercisesFragment(),item.toString());
                 break;
         }
 

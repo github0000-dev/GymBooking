@@ -5,15 +5,15 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Sessions.GymCoach.pages.Programs.AddProgram.AddProgramActivity">
+        tools:context=".Sessions.GymCoach.pages.Exercises.AddExercise.AddExerciseActivity">
 
 
 
     <TextView
-            android:id="@+id/program_form_banner"
+            android:id="@+id/exercise_form_banner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Coach Program Form"
+            android:text="Coach Exercise Form"
             android:textSize="25dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,23 +27,23 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:hint="Program Name"
+            android:hint="Exercise Name"
             android:ems="10"
-            android:id="@+id/program_form_field_name"
+            android:id="@+id/exercise_form_field_name"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/program_form_banner" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/exercise_form_banner" app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.5" app:layout_constraintVertical_bias="0.05"/>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/program_form_scroll_description"
+            android:id="@+id/exercise_form_scroll_description"
             android:background="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="337dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/program_form_field_name"
+            app:layout_constraintTop_toBottomOf="@+id/exercise_form_field_name"
             app:layout_constraintVertical_bias="0.142">
 
         <ScrollView
@@ -60,7 +60,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
             <EditText
-                    android:id="@+id/program_form_field_description"
+                    android:id="@+id/exercise_form_field_description"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -77,7 +77,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-            android:id="@+id/program_form_button_submit"
+            android:id="@+id/exercise_form_button_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Submit"
@@ -85,12 +85,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/program_form_scroll_description"
+            app:layout_constraintTop_toBottomOf="@+id/exercise_form_scroll_description"
             app:layout_constraintVertical_bias="0.367" />
 
 
     <Button
-            android:id="@+id/program_form_button_reset"
+            android:id="@+id/exercise_form_button_reset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Reset Fields"
@@ -98,6 +98,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/program_form_button_submit"
+            app:layout_constraintTop_toBottomOf="@+id/exercise_form_button_submit"
             app:layout_constraintVertical_bias="0.267" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.domzky.gymbooking.Sessions.GymCoach.pages.Programs;
+package com.domzky.gymbooking.Sessions.GymCoach.pages.Exercises;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -16,12 +16,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.domzky.gymbooking.Helpers.FieldSyntaxes.MoneyTextWatcher;
 import com.domzky.gymbooking.Helpers.Firebase.FirebaseHelper;
-import com.domzky.gymbooking.Helpers.Things.Program;
+import com.domzky.gymbooking.Helpers.Things.Exercises;
 import com.domzky.gymbooking.R;
-import com.domzky.gymbooking.Sessions.GymCoach.pages.Programs.ModifyProgram.ModifyProgramActivity;
-import com.domzky.gymbooking.Sessions.GymOwner.pages.Membership.ModifyMembership.ModifyMembershipActivity;
+import com.domzky.gymbooking.Sessions.GymCoach.pages.Exercises.ModifyExercise.ModifyExerciseActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -29,44 +27,44 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.List;
 
-public class ProgramsAdapter extends RecyclerView.Adapter<ProgramsAdapter.ViewHolder> {
+public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.ViewHolder> {
     
-    public List<Program> list;
+    public List<Exercises> list;
     public Context wholeContext;
     
-    private DatabaseReference db = new FirebaseHelper().getProgramReference();
+    private DatabaseReference db = new FirebaseHelper().getExerciseReference();
     
-    public ProgramsAdapter(List<Program> list,Context wholeContext) {
+    public ExercisesAdapter(List<Exercises> list, Context wholeContext) {
         this.list = list;
         this.wholeContext = wholeContext;
     }
     
     @NonNull
     @Override
-    public ProgramsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ExercisesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.coach_menu_program_item,parent,false);
-        ProgramsAdapter.ViewHolder holder = new ProgramsAdapter.ViewHolder(view);
+        View view = inflater.inflate(R.layout.coach_menu_exercise_item,parent,false);
+        ExercisesAdapter.ViewHolder holder = new ExercisesAdapter.ViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProgramsAdapter.ViewHolder holder, int position) {
-        Program program = list.get(position);
+    public void onBindViewHolder(@NonNull ExercisesAdapter.ViewHolder holder, int position) {
+        Exercises exercises = list.get(position);
 
-        holder.programname.setText(program.name);
-//        holder.programdesc.setText(program.description);
+        holder.exercisename.setText(exercises.name);
+//        holder.exercisedesc.setText(exercise.description);
         
         holder.delBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ProgressDialog progress = new ProgressDialog(wholeContext);
                 progress.setCancelable(false);
-                progress.setMessage("Removing Program");
+                progress.setMessage("Removing Exercise");
                 AlertDialog.Builder builder = new AlertDialog.Builder(wholeContext);
-                builder.setTitle("Delete " + program.name);
-                builder.setMessage("Are you sure you want to remove this program?");
+                builder.setTitle("Delete " + exercises.name);
+                builder.setMessage("Are you sure you want to remove this exercise?");
                 builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -77,18 +75,18 @@ public class ProgramsAdapter extends RecyclerView.Adapter<ProgramsAdapter.ViewHo
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         progress.show();
-                        db.child(program.program_id).child("deleted").setValue(true)
+                        db.child(exercises.exercise_id).child("deleted").setValue(true)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         progress.dismiss();
-                                        Toast.makeText(wholeContext,"Program Removed.",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(wholeContext,"Exercise Removed.",Toast.LENGTH_SHORT).show();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         Log.e("FIREBASE ERROR",""+ e.getMessage());
-                                        Toast.makeText(wholeContext,"Program Removing Failed. Please Try Again",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(wholeContext,"Exercise Removing Failed. Please Try Again",Toast.LENGTH_SHORT).show();
                                     }
                                 });
                     }
@@ -100,10 +98,10 @@ public class ProgramsAdapter extends RecyclerView.Adapter<ProgramsAdapter.ViewHo
         holder.editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                wholeContext.startActivity(new Intent(wholeContext, ModifyProgramActivity.class)
-                        .putExtra("program_id",program.program_id)
-                        .putExtra("program_name",program.name)
-                        .putExtra("program_description",program.description)
+                wholeContext.startActivity(new Intent(wholeContext, ModifyExerciseActivity.class)
+                        .putExtra("exercise_id", exercises.exercise_id)
+                        .putExtra("exercise_name", exercises.name)
+                        .putExtra("exercise_description", exercises.description)
                 );
             }
         });
@@ -116,14 +114,14 @@ public class ProgramsAdapter extends RecyclerView.Adapter<ProgramsAdapter.ViewHo
     }
     
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView programname,programdesc;
+        TextView exercisename,exercisedesc;
         ImageButton delBtn,editBtn;
         public ViewHolder(View itemView) {
             super(itemView);
-            programname = itemView.findViewById(R.id.coach_program_item_name);
-//            programdesc = itemView.findViewById(R.id.coach_program_item_description);
-            delBtn = itemView.findViewById(R.id.coach_program_item_btn_delete);
-            editBtn = itemView.findViewById(R.id.coach_program_item_btn_edit);
+            exercisename = itemView.findViewById(R.id.coach_exercise_item_name);
+//            exercisedesc = itemView.findViewById(R.id.coach_exercise_item_description);
+            delBtn = itemView.findViewById(R.id.coach_exercise_item_btn_delete);
+            editBtn = itemView.findViewById(R.id.coach_exercise_item_btn_edit);
         }
         
     }

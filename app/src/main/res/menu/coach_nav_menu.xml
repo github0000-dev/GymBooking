@@ -3,9 +3,9 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/coach_menu_programs"
+            android:id="@+id/coach_menu_exercises"
             android:icon="@drawable/ic_baseline_fitness_center_24"
-            android:title="Programs" />
+            android:title="Exercises" />
         <item
             android:id="@+id/coach_menu_members"
             android:icon="@drawable/ic_baseline_people_outline_24"

@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/member_gym_item_clicker"
         android:orientation="horizontal"
         android:background="@color/purple_200"
         android:layout_margin="20dp"

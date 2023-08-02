@@ -6,13 +6,17 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.domzky.gymbooking.Helpers.Providers.SIM.SIMHelper;
 import com.domzky.gymbooking.Helpers.Users.GymStaff;
 import com.domzky.gymbooking.R;
+import com.domzky.gymbooking.Sessions.GymOwner.pages.CoachesList.ModifyCoach.ModifyCoachActivity;
 import com.domzky.gymbooking.Sessions.GymOwner.pages.StaffsList.ModifyStaff.ModifyStaffActivity;
 
 import java.util.List;
@@ -33,14 +37,17 @@ public class StaffListAdapter extends RecyclerView.Adapter<StaffListAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView staff_fullname,staff_active;
+
+        public TextView fullname;
+        public ImageButton callBtn,textBtn;
+        public ImageView profilePic;
 
         public ViewHolder(View itemView) {
             super(itemView);
-
-            staff_fullname = itemView.findViewById(R.id.staff_item_fullname);
-            staff_active = itemView.findViewById(R.id.staff_item_activated);
-
+            fullname = itemView.findViewById(R.id.list_of_profiles_button_fullname);
+            callBtn = itemView.findViewById(R.id.list_of_profiles_button_call);
+            textBtn = itemView.findViewById(R.id.list_of_profiles_button_text);
+            profilePic = itemView.findViewById(R.id.list_of_profiles_profile_image);
         }
 
     }
@@ -50,8 +57,7 @@ public class StaffListAdapter extends RecyclerView.Adapter<StaffListAdapter.View
     public StaffListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.owner_staff_item,parent,false);
-
+        View view = inflater.inflate(R.layout.list_of_profiles_item,parent,false);
         StaffListAdapter.ViewHolder holder = new StaffListAdapter.ViewHolder(view);
         return holder;
     }
@@ -60,18 +66,30 @@ public class StaffListAdapter extends RecyclerView.Adapter<StaffListAdapter.View
     public void onBindViewHolder(@NonNull StaffListAdapter.ViewHolder holder, int position) {
         GymStaff staff = list.get(position);
 
-        holder.staff_fullname.setText(staff.fullname);
+        holder.fullname.setText(staff.fullname);
+
         if (staff.activated) {
-            holder.staff_active.setText("ACCOUNT ACTIVE");
-            holder.staff_active.setTextColor(Color.GREEN);
+            holder.profilePic.setColorFilter(0xFF004953); // MIDNIGHT GREEN
         } else {
-            holder.staff_active.setText("ACCOUNT INACTIVE");
-            holder.staff_active.setTextColor(Color.RED);
+            holder.profilePic.setColorFilter(0xFF432938); // MIDNIGHT RED
         }
-        
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+        holder.callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                new SIMHelper(v.getContext()).callNumber(staff.phone);
+            }
+        });
+        holder.textBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new SIMHelper(v.getContext()).textNumber(staff.phone);
+            }
+        });
+
+        holder.profilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 wholeContext.startActivity(new Intent(wholeContext, ModifyStaffActivity.class)
                         .putExtra("staffuid",staff.uid)
                         .putExtra("gymuid",staff.gym_id)

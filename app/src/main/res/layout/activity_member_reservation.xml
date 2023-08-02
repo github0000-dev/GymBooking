@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Sessions.Members.pages.Dashboard.Reservation.MemberReservationActivity">
+    tools:context=".Sessions.Members.pages.Dashboard.DashboardDesk.Reservation.MemberReservationActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

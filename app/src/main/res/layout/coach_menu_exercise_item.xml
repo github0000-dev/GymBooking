@@ -32,7 +32,7 @@
                 android:padding="20px">
 
             <TextView
-                    android:id="@+id/coach_program_item_name"
+                    android:id="@+id/coach_exercise_item_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Program Name"
@@ -40,7 +40,7 @@
                     android:textSize="20dp"/>
 
             <!--            <TextView-->
-            <!--                    android:id="@+id/coach_program_item_description"-->
+            <!--                    android:id="@+id/coach_exercise_item_description"-->
             <!--                    android:layout_width="match_parent"-->
             <!--                    android:layout_height="wrap_content"-->
             <!--                    android:text="Program Description"-->
@@ -55,7 +55,7 @@
                 android:padding="20px">
             <ImageButton
                     android:layout_width="wrap_content"
-                    android:id="@+id/coach_program_item_btn_delete"
+                    android:id="@+id/coach_exercise_item_btn_delete"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_baseline_delete_24"
                     app:tint="#F44336"
@@ -72,7 +72,7 @@
             <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/coach_program_item_btn_edit"
+                    android:id="@+id/coach_exercise_item_btn_edit"
                     android:src="@drawable/ic_baseline_edit_24"
                     app:tint="@color/white"
                     android:background="?android:selectableItemBackground"

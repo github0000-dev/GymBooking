@@ -1,4 +1,4 @@
-package com.domzky.gymbooking.Sessions.GymCoach.pages.Programs.AddProgram;
+package com.domzky.gymbooking.Sessions.GymCoach.pages.Exercises.AddExercise;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.domzky.gymbooking.Helpers.FieldSyntaxes.FieldValidations;
 import com.domzky.gymbooking.Helpers.Firebase.FirebaseHelper;
-import com.domzky.gymbooking.Helpers.Things.Program;
+import com.domzky.gymbooking.Helpers.Things.Exercises;
 import com.domzky.gymbooking.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,10 +26,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Locale;
 
-public class AddProgramActivity extends AppCompatActivity {
+public class AddExerciseActivity extends AppCompatActivity {
 
-    private DatabaseReference dbread = new FirebaseHelper().getProgramReference();
-    private DatabaseReference dbwrite = new FirebaseHelper().getProgramReference();
+    private DatabaseReference dbread = new FirebaseHelper().getExerciseReference();
+    private DatabaseReference dbwrite = new FirebaseHelper().getExerciseReference();
 
     private TextView banner;
     private EditText nameField,descriptionField;
@@ -45,23 +45,23 @@ public class AddProgramActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_coach_program_form);
+        setContentView(R.layout.activity_coach_exercise_form);
 
         preferences = this.getSharedPreferences("coach",MODE_PRIVATE);
-        progress = new ProgressDialog(AddProgramActivity.this);
+        progress = new ProgressDialog(AddExerciseActivity.this);
         progress.setCancelable(false);
-        progress.setMessage("Adding Program".toUpperCase(Locale.ROOT));
+        progress.setMessage("Adding Exercise".toUpperCase(Locale.ROOT));
 
-        banner = findViewById(R.id.program_form_banner);
+        banner = findViewById(R.id.exercise_form_banner);
 
-        nameField = findViewById(R.id.program_form_field_name);
-        descriptionField = findViewById(R.id.program_form_field_description);
+        nameField = findViewById(R.id.exercise_form_field_name);
+        descriptionField = findViewById(R.id.exercise_form_field_description);
 
-        addBtn = findViewById(R.id.program_form_button_submit);
-        resetBtn = findViewById(R.id.program_form_button_reset);
+        addBtn = findViewById(R.id.exercise_form_button_submit);
+        resetBtn = findViewById(R.id.exercise_form_button_reset);
 
         resetBtn.setVisibility(View.GONE);
-        addBtn.setText("Add to Program List");
+        addBtn.setText("Add to Exercise List");
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,12 +81,12 @@ public class AddProgramActivity extends AppCompatActivity {
                 dbread.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (fieldVal.isProgramNameExists(snapshot,name,preferences.getString("userid",""))) {
-                            nameField.setError("This Program Exists.");
+                        if (fieldVal.isExerciseNameExists(snapshot,name,preferences.getString("userid",""))) {
+                            nameField.setError("This Exercise Exists.");
                             progress.dismiss();
                             return;
                         }
-                        dbwrite.push().setValue(new Program(
+                        dbwrite.push().setValue(new Exercises(
                                 name,
                                 preferences.getString("userid",""),
                                 description,
@@ -95,14 +95,14 @@ public class AddProgramActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 progress.dismiss();
-                                Toast.makeText(AddProgramActivity.this,"Program Added Successfully.",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AddExerciseActivity.this,"Exercise Added Successfully.",Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Log.e("FIREBASE ERROR",""+ e.getMessage());
-                                Toast.makeText(getBaseContext(),"Program Adding Failed. Please Try Again",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getBaseContext(),"Exercise Adding Failed. Please Try Again",Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -112,7 +112,7 @@ public class AddProgramActivity extends AppCompatActivity {
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                         Log.e("FIREBASE ERROR",""+ error.getMessage());
-                        Toast.makeText(getBaseContext(),"Program Adding Failed. Please Try Again",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(),"Exercise Adding Failed. Please Try Again",Toast.LENGTH_SHORT).show();
                     }
                 });
 

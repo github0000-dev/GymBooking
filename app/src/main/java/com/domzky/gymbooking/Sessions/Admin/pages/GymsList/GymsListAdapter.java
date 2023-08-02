@@ -6,12 +6,12 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.domzky.gymbooking.Helpers.Providers.SIM.SIMHelper;
 import com.domzky.gymbooking.Helpers.Users.Gym;
 import com.domzky.gymbooking.Helpers.Users.GymOwner;
 import com.domzky.gymbooking.R;
@@ -33,13 +33,17 @@ public class GymsListAdapter extends RecyclerView.Adapter<GymsListAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView gymname,fullname,gymaddress;
+
+        public TextView fullname;
+        public ImageButton callBtn,textBtn;
+        public ImageView profilePic;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            fullname = itemView.findViewById(R.id.owner_item_full_name);
-            gymname = itemView.findViewById(R.id.owner_item_gym_name);
-            gymaddress = itemView.findViewById(R.id.owner_item_gym_address);
+            fullname = itemView.findViewById(R.id.list_of_profiles_button_fullname);
+            callBtn = itemView.findViewById(R.id.list_of_profiles_button_call);
+            textBtn = itemView.findViewById(R.id.list_of_profiles_button_text);
+            profilePic = itemView.findViewById(R.id.list_of_profiles_profile_image);
         }
     }
 
@@ -48,8 +52,7 @@ public class GymsListAdapter extends RecyclerView.Adapter<GymsListAdapter.ViewHo
     public GymsListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.admin_user_item,parent,false);
-
+        View view = inflater.inflate(R.layout.list_of_profiles_item,parent,false);
         GymsListAdapter.ViewHolder viewHolder = new GymsListAdapter.ViewHolder(view);
         return viewHolder;
     }
@@ -58,21 +61,31 @@ public class GymsListAdapter extends RecyclerView.Adapter<GymsListAdapter.ViewHo
     public void onBindViewHolder(@NonNull GymsListAdapter.ViewHolder holder, int position) {
         Gym gym = list.get(position);
 
-        holder.gymname.setText(gym.gym_name.toUpperCase(Locale.ROOT));
+        holder.fullname.setText(gym.gym_name);
+        holder.profilePic.setImageResource(R.drawable.ic_baseline_other_houses_24);
 
         if (gym.gym_activated) {
-            holder.gymaddress.setText("Gym Active".toUpperCase(Locale.ROOT));
-            holder.gymaddress.setTextColor(Color.GREEN);
+            holder.profilePic.setColorFilter(0xFF004953); // MIDNIGHT GREEN
         } else {
-            holder.gymaddress.setText("Gym Inactive".toUpperCase(Locale.ROOT));
-            holder.gymaddress.setTextColor(Color.RED);
+            holder.profilePic.setColorFilter(0xFF432938); // MIDNIGHT RED
         }
 
-        holder.fullname.setText(gym.gym_address);
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                new SIMHelper(v.getContext()).callNumber(gym.owner.phone);
+            }
+        });
+        holder.textBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new SIMHelper(v.getContext()).textNumber(gym.owner.phone);
+            }
+        });
+
+        holder.profilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 wholeContext.startActivity(new Intent(wholeContext, ModifyGymActivity.class)
                         .putExtra("gymuid",gym.uid)
                         .putExtra("gymname",gym.gym_name)
@@ -87,6 +100,37 @@ public class GymsListAdapter extends RecyclerView.Adapter<GymsListAdapter.ViewHo
                 );
             }
         });
+
+//        holder.gymname.setText(gym.gym_name.toUpperCase(Locale.ROOT));
+//
+//        if (gym.gym_activated) {
+//            holder.gymaddress.setText("Gym Active".toUpperCase(Locale.ROOT));
+//            holder.gymaddress.setTextColor(Color.GREEN);
+//        } else {
+//            holder.gymaddress.setText("Gym Inactive".toUpperCase(Locale.ROOT));
+//            holder.gymaddress.setTextColor(Color.RED);
+//        }
+//
+//        holder.fullname.setText(gym.gym_address);
+//
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                wholeContext.startActivity(new Intent(wholeContext, ModifyGymActivity.class)
+//                        .putExtra("gymuid",gym.uid)
+//                        .putExtra("gymname",gym.gym_name)
+//                        .putExtra("gymaddress",gym.gym_address)
+//                        .putExtra("gymactivated",gym.gym_activated)
+//                        .putExtra("gymstatus",gym.gym_status)
+//                        .putExtra("ownername",gym.owner.fullname)
+//                        .putExtra("owneremail",gym.owner.email)
+//                        .putExtra("ownerphone",gym.owner.phone)
+//                        .putExtra("ownerusername",gym.owner.username)
+//                        .putExtra("ownerpassword",gym.owner.password)
+//                );
+//            }
+//        });
+        
     }
 
     @Override

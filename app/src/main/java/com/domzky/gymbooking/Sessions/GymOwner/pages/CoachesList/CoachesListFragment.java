@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -74,7 +75,7 @@ public class CoachesListFragment extends Fragment {
                     }
                 }
                 recView.setAdapter(new CoachListAdapter(list,getActivity()));
-                recView.setLayoutManager(new LinearLayoutManager(getContext()));
+                recView.setLayoutManager(new GridLayoutManager(getContext(),2));
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

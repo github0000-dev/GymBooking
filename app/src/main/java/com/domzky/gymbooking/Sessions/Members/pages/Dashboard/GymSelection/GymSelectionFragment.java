@@ -1,4 +1,4 @@
-package com.domzky.gymbooking.Sessions.Members.pages.Dashboard;
+package com.domzky.gymbooking.Sessions.Members.pages.Dashboard.GymSelection;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GymsListFragment extends Fragment {
+public class GymSelectionFragment extends Fragment {
 
     private RecyclerView recview;
 
@@ -44,7 +44,7 @@ public class GymsListFragment extends Fragment {
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                list.clear();
                 for (DataSnapshot snap : snapshot.getChildren()) {
                     if (snap.child("gym_activated").getValue(Boolean.class)) {
                         list.add(new Gym(
@@ -57,7 +57,7 @@ public class GymsListFragment extends Fragment {
                     }
                 }
 
-                recview.setAdapter(new GymsListAdapter(list));
+                recview.setAdapter(new GymSelectionAdapter(list,getActivity()));
                 recview.setLayoutManager(new LinearLayoutManager(getContext()));
             }
             @Override

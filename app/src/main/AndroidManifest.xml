@@ -12,14 +12,18 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.GymBooking"
             tools:targetApi="31">
+
         <activity
-                android:name=".Sessions.GymCoach.pages.Programs.ModifyProgram.ModifyProgramActivity"
+                android:name=".Sessions.Members.pages.Dashboard.GymSelection.GymItem.GymItemActivity"
                 android:exported="false"/>
         <activity
-                android:name=".Sessions.GymCoach.pages.Programs.AddProgram.AddProgramActivity"
+                android:name=".Sessions.GymCoach.pages.Exercises.ModifyExercise.ModifyExerciseActivity"
                 android:exported="false"/>
         <activity
-                android:name=".Sessions.Members.pages.Dashboard.Reservation.MemberReservationActivity"
+                android:name=".Sessions.GymCoach.pages.Exercises.AddExercise.AddExerciseActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".Sessions.Members.pages.Dashboard.DashboardDesk.Reservation.MemberReservationActivity"
                 android:exported="false"/>
         <activity
                 android:name=".Sessions.GymOwner.pages.Membership.ShowJoined.ShowJoinedmembershipActivity"
@@ -156,7 +160,7 @@
         <activity
                 android:name=".Sessions.Members.MemberSessionActivity"
                 android:exported="false"
-                android:launchMode="singleInstance">
+                android:launchMode="singleInstancePerTask">
             <meta-data
                     android:name="android.app.lib_name"
                     android:value=""/>

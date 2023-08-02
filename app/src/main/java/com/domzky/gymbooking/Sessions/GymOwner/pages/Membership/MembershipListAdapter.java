@@ -45,7 +45,7 @@ public class MembershipListAdapter extends RecyclerView.Adapter<MembershipListAd
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView membership_name,members_joined;
-        ImageButton editBtn,deletebtn;
+        ImageButton editBtn,deletebtn,infoBtn;
         LinearLayout joinedBtn;
 
         public ViewHolder(View itemView) {
@@ -55,7 +55,10 @@ public class MembershipListAdapter extends RecyclerView.Adapter<MembershipListAd
             members_joined = itemView.findViewById(R.id.membership_adapter_item_joined);
             editBtn = itemView.findViewById(R.id.membership_adapter_item_btn_edit);
             deletebtn = itemView.findViewById(R.id.membership_adapter_item_btn_delete);
+            infoBtn = itemView.findViewById(R.id.membership_adapter_item_btn_info);
             joinedBtn = itemView.findViewById(R.id.membership_adapter_item_btn_joined);
+
+            infoBtn.setVisibility(View.GONE);
 
         }
     }
@@ -91,7 +94,7 @@ public class MembershipListAdapter extends RecyclerView.Adapter<MembershipListAd
                 progress.setCancelable(false);
                 progress.setMessage("Removing Membership");
                 AlertDialog.Builder builder = new AlertDialog.Builder(wholeContext);
-                builder.setTitle("Delete Membership");
+                builder.setTitle("Delete " + membership.name + " Membership");
                 builder.setMessage("Are you sure you want to remove this membership?");
                 builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
                     @Override

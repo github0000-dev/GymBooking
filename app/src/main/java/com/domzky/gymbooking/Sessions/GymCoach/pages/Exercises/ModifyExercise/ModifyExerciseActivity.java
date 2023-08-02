@@ -1,4 +1,4 @@
-package com.domzky.gymbooking.Sessions.GymCoach.pages.Programs.ModifyProgram;
+package com.domzky.gymbooking.Sessions.GymCoach.pages.Exercises.ModifyExercise;
 
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.domzky.gymbooking.Helpers.FieldSyntaxes.FieldValidations;
 import com.domzky.gymbooking.Helpers.Firebase.FirebaseHelper;
-import com.domzky.gymbooking.Helpers.Things.Program;
+import com.domzky.gymbooking.Helpers.Things.Exercises;
 import com.domzky.gymbooking.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -25,11 +25,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Locale;
 
-public class ModifyProgramActivity extends AppCompatActivity {
+public class ModifyExerciseActivity extends AppCompatActivity {
 
 
-    private DatabaseReference dbread = new FirebaseHelper().getProgramReference();
-    private DatabaseReference dbwrite = new FirebaseHelper().getProgramReference();
+    private DatabaseReference dbread = new FirebaseHelper().getExerciseReference();
+    private DatabaseReference dbwrite = new FirebaseHelper().getExerciseReference();
 
     private TextView banner;
     private EditText nameField,descriptionField;
@@ -44,31 +44,31 @@ public class ModifyProgramActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_coach_program_form);
+        setContentView(R.layout.activity_coach_exercise_form);
 
         preferences = this.getSharedPreferences("coach",MODE_PRIVATE);
-        progress = new ProgressDialog(ModifyProgramActivity.this);
+        progress = new ProgressDialog(ModifyExerciseActivity.this);
         progress.setCancelable(false);
-        progress.setMessage("Changing Program");
+        progress.setMessage("Changing Exercise");
 
 
-        reset_uid = getIntent().getStringExtra("program_id");
-        reset_name = getIntent().getStringExtra("program_name");
-        reset_description = getIntent().getStringExtra("program_description");
+        reset_uid = getIntent().getStringExtra("exercise_id");
+        reset_name = getIntent().getStringExtra("exercise_name");
+        reset_description = getIntent().getStringExtra("exercise_description");
 
-        banner = findViewById(R.id.program_form_banner);
-        banner.setText("Modify Program Form".toUpperCase(Locale.ROOT));
+        banner = findViewById(R.id.exercise_form_banner);
+        banner.setText("Modify Exercise Form".toUpperCase(Locale.ROOT));
 
-        nameField = findViewById(R.id.program_form_field_name);
-        descriptionField = findViewById(R.id.program_form_field_description);
+        nameField = findViewById(R.id.exercise_form_field_name);
+        descriptionField = findViewById(R.id.exercise_form_field_description);
 
-        addBtn = findViewById(R.id.program_form_button_submit);
-        resetBtn = findViewById(R.id.program_form_button_reset);
+        addBtn = findViewById(R.id.exercise_form_button_submit);
+        resetBtn = findViewById(R.id.exercise_form_button_reset);
 
         resetFieldsByDefault();
 
-        addBtn = findViewById(R.id.program_form_button_submit);
-        resetBtn = findViewById(R.id.program_form_button_reset);
+        addBtn = findViewById(R.id.exercise_form_button_submit);
+        resetBtn = findViewById(R.id.exercise_form_button_reset);
 
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +77,7 @@ public class ModifyProgramActivity extends AppCompatActivity {
             }
         });
 
-        addBtn.setText("update Program");
+        addBtn.setText("update Exercise");
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +89,7 @@ public class ModifyProgramActivity extends AppCompatActivity {
 
 
                 if (checkIfFieldsAreNotDefaultState(name,description)) {
-                    Toast.makeText(ModifyProgramActivity.this,"No Changes been Made.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ModifyExerciseActivity.this,"No Changes been Made.",Toast.LENGTH_SHORT).show();
                     progress.dismiss();
                     return;
                 }
@@ -105,14 +105,14 @@ public class ModifyProgramActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (
-                                fieldVal.isProgramNameExists(snapshot,name,preferences.getString("userid",""))
+                                fieldVal.isExerciseNameExists(snapshot,name,preferences.getString("userid",""))
                                 && !name.equals(reset_name)
                         ) {
-                            nameField.setError("This Program Exists.");
+                            nameField.setError("This Exercise Exists.");
                             progress.dismiss();
                             return;
                         }
-                        dbwrite.child(reset_uid).setValue(new Program(
+                        dbwrite.child(reset_uid).setValue(new Exercises(
                                 name,
                                 preferences.getString("userid",""),
                                 description,
@@ -121,14 +121,14 @@ public class ModifyProgramActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 progress.dismiss();
-                                Toast.makeText(ModifyProgramActivity.this,"Program Added Successfully.",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ModifyExerciseActivity.this,"Exercise Added Successfully.",Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Log.e("FIREBASE ERROR",""+ e.getMessage());
-                                Toast.makeText(getBaseContext(),"Program Adding Failed. Please Try Again",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getBaseContext(),"Exercise Adding Failed. Please Try Again",Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -138,7 +138,7 @@ public class ModifyProgramActivity extends AppCompatActivity {
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                         Log.e("FIREBASE ERROR",""+ error.getMessage());
-                        Toast.makeText(getBaseContext(),"Program Adding Failed. Please Try Again",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(),"Exercise Adding Failed. Please Try Again",Toast.LENGTH_SHORT).show();
                     }
                 });
 

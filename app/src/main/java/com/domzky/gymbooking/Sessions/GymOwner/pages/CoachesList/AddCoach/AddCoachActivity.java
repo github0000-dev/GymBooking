@@ -79,7 +79,7 @@ public class AddCoachActivity extends AppCompatActivity {
         activationSwt.setVisibility(View.INVISIBLE);
         resetBtn.setVisibility(View.INVISIBLE);
         signupBtn.setText("Register Coach");
-        banner.setText("ADDING Coach FORM");
+        banner.setText("ADDING COACH FORM");
 
         showPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
