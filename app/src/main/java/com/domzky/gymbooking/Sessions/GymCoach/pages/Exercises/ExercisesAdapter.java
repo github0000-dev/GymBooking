@@ -17,7 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.domzky.gymbooking.Helpers.Firebase.FirebaseHelper;
-import com.domzky.gymbooking.Helpers.Things.Exercises;
+import com.domzky.gymbooking.Helpers.Things.Exercise;
 import com.domzky.gymbooking.R;
 import com.domzky.gymbooking.Sessions.GymCoach.pages.Exercises.ModifyExercise.ModifyExerciseActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,12 +29,12 @@ import java.util.List;
 
 public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.ViewHolder> {
     
-    public List<Exercises> list;
+    public List<Exercise> list;
     public Context wholeContext;
     
-    private DatabaseReference db = new FirebaseHelper().getExerciseReference();
+    private DatabaseReference db = new FirebaseHelper().getCoachExerciseReference();
     
-    public ExercisesAdapter(List<Exercises> list, Context wholeContext) {
+    public ExercisesAdapter(List<Exercise> list, Context wholeContext) {
         this.list = list;
         this.wholeContext = wholeContext;
     }
@@ -51,9 +51,9 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ExercisesAdapter.ViewHolder holder, int position) {
-        Exercises exercises = list.get(position);
+        Exercise exercise = list.get(position);
 
-        holder.exercisename.setText(exercises.name);
+        holder.exercisename.setText(exercise.name);
 //        holder.exercisedesc.setText(exercise.description);
         
         holder.delBtn.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +63,7 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.View
                 progress.setCancelable(false);
                 progress.setMessage("Removing Exercise");
                 AlertDialog.Builder builder = new AlertDialog.Builder(wholeContext);
-                builder.setTitle("Delete " + exercises.name);
+                builder.setTitle("Delete " + exercise.name);
                 builder.setMessage("Are you sure you want to remove this exercise?");
                 builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
                     @Override
@@ -75,7 +75,7 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.View
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         progress.show();
-                        db.child(exercises.exercise_id).child("deleted").setValue(true)
+                        db.child(exercise.exercise_id).child("deleted").setValue(true)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
@@ -99,9 +99,9 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.View
             @Override
             public void onClick(View v) {
                 wholeContext.startActivity(new Intent(wholeContext, ModifyExerciseActivity.class)
-                        .putExtra("exercise_id", exercises.exercise_id)
-                        .putExtra("exercise_name", exercises.name)
-                        .putExtra("exercise_description", exercises.description)
+                        .putExtra("exercise_id", exercise.exercise_id)
+                        .putExtra("exercise_name", exercise.name)
+                        .putExtra("exercise_description", exercise.description)
                 );
             }
         });

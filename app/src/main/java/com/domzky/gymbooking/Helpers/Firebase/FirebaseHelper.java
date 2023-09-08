@@ -8,6 +8,9 @@ public class FirebaseHelper {
 
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
+    public DatabaseReference getDietReference() {
+        return ref.child("Diets");
+    }
     public DatabaseReference getRootReference() {
         return ref;
     }
@@ -32,7 +35,18 @@ public class FirebaseHelper {
     }
 
     public DatabaseReference getExerciseReference () {
-        return ref.child("Programs");
+        return ref.child("Exercises");
     }
+    public DatabaseReference getCoachExerciseReference () {
+        return ref.child("Exercises").child("GymCoaches");
+    }
+    public DatabaseReference getMemberExerciseReference () {
+        return ref.child("Exercises").child("Members");
+    }
+
+    public DatabaseReference getBmiReference() {
+        return ref.child("BMI");
+    }
+
 
 }

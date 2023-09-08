@@ -1,9 +1,12 @@
 package com.domzky.gymbooking.Helpers.Things;
 
+import com.domzky.gymbooking.Helpers.Users.GymCoach;
+
 public class BMI {
-    public String datetime,member_id,coach_id,heightUnit,weightUnit,description;
-    public Boolean deleted;
+    public String datetime,member_id,coach_id,description,bmi_id;
+    public Boolean deleted,heightEnglish,weightEnglish;
     public Double height,weight,totalBMI;
+    public GymCoach coach;
 
     public BMI(){}
 
@@ -17,36 +20,38 @@ public class BMI {
         this.deleted = deleted;
     }
 
-    public BMI(String member_id,String coach_id,String datetime,String description,Double height,Double weight,String heightUnit,String weightUnit,Boolean deleted) {
+    public BMI(String bmi_id,String member_id,GymCoach coach,String datetime,String description,Double height,Double weight,Boolean heightEnglish,Boolean weightEnglish,Boolean deleted) {
         this.member_id = member_id;
-        this.coach_id = coach_id;
+        this.bmi_id = bmi_id;
+        this.coach = coach;
         this.datetime = datetime;
         this.description = description;
         this.height = height;
         this.weight = weight;
         this.deleted = deleted;
-        this.heightUnit = heightUnit;
-        this.weightUnit = weightUnit;
-        this.totalBMI = this.convertToBMI_withUnits(height,weight,heightUnit,weightUnit);
+        this.heightEnglish = heightEnglish;
+        this.weightEnglish = weightEnglish;
+        this.totalBMI = this.convertToBMI(height,weight,heightEnglish,weightEnglish);
     }
 
-    public Double convertToBMI(Double height, Double weight) {
-        return weight/(Math.sqrt(height));
+    public Double getTotalBMI() {
+        return totalBMI;
     }
-    public Double convertToBMI_withUnits(Double height, Double weight, String heightUnit,String weightUnit) {
+
+    public Double convertToBMI(Double height, Double weight, Boolean heightEnglish, Boolean weightEnglish) {
         Double meters,kilos;
-//        if (heightUnit.equals("English")) {
+//        if (heightEnglish) {
 //            meters = height * 0.3048;
 //        } else {
 //            meters = height;
 //        }
-//        if (weightUnit.equals("English")) {
+//        if (weightEnglish) {
 //            kilos = weight * 0.45359237;
 //        } else {
 //            kilos = weight;
 //        }
-        meters = heightUnit.equals("English")? height * 0.3048 : height;
-        kilos = weightUnit.equals("English")? weight * 0.45359237: weight;
+        meters = heightEnglish? height * 0.3048 : height;
+        kilos = weightEnglish? weight * 0.45359237: weight;
         return kilos/Math.pow(meters,2);
     }
 }

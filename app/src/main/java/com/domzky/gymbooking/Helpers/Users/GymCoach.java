@@ -5,6 +5,11 @@ public class GymCoach {
     public Boolean activated;
     public Gym gym;
 
+    public GymCoach(String uid,String fullname) {
+        this.uid = uid;
+        this.fullname = fullname;
+    }
+
     public GymCoach(String uid,String fullname,String email,String phone,String username,String password,Boolean activated,String gym_id) {
         this.uid = uid;
         this.fullname = fullname;

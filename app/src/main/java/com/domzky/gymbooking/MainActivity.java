@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.domzky.gymbooking.Helpers.FieldSyntaxes.DateTimeHelper;
 import com.domzky.gymbooking.Helpers.Firebase.FirebaseHelper;
 import com.domzky.gymbooking.Sessions.Admin.AdminSignupActivity;
 import com.domzky.gymbooking.Sessions.UsersActivity;
@@ -18,6 +19,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        Log.d("Today's Date", Calendar.getInstance().getTime().toString());
+        Log.d("System's Date", String.valueOf(System.currentTimeMillis()));
+        Log.d("Instance Date",new DateTimeHelper().getNowDateTime());
 
         checkAdmin.addValueEventListener(new ValueEventListener() {
             @Override

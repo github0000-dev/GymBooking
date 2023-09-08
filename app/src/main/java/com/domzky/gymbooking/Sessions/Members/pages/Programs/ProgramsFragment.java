@@ -4,22 +4,20 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.domzky.gymbooking.Helpers.Things.BMI;
+import androidx.viewpager2.widget.ViewPager2;
 import com.domzky.gymbooking.R;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.google.android.material.tabs.TabLayout;
 
 public class ProgramsFragment extends Fragment {
 
-    private RecyclerView recview;
-    private List<BMI> list;
+    private ProgramsViewPagerAdapter adapter;
+    private ViewPager2 viewPager;
+    private TabLayout tabLayout;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -27,8 +25,23 @@ public class ProgramsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_member_programs, container, false);
 
-        recview = view.findViewById(R.id.member_programs_recview);
-        list = new ArrayList<>();
+        viewPager = view.findViewById(R.id.member_dashboard_viewpager);
+        tabLayout = view.findViewById(R.id.member_dashboard_tablayout);
+        adapter = new ProgramsViewPagerAdapter(getActivity());
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {}
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
+        });
+
+        viewPager.setAdapter(adapter);
+        viewPager.setUserInputEnabled(false);
 
         return view;
     }

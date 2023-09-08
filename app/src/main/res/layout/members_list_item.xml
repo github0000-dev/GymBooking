@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
+        android:background="@color/purple_200"    
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -33,14 +34,14 @@
             android:paddingHorizontal="4dp">
 
             <TextView
-                android:id="@+id/coach_item_member_name"
+                android:id="@+id/profile_item_member_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Member Name"
                 android:textColor="#000000"
                 android:textSize="25dp" />
             <TextView
-                android:id="@+id/coach_item_member_type"
+                android:id="@+id/profile_item_member_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Member Type"

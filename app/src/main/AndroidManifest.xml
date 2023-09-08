@@ -12,7 +12,12 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.GymBooking"
             tools:targetApi="31">
-
+        <activity
+                android:name=".AddExerciseActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".ProgramForMemberActivity"
+                android:exported="false"/>
         <activity
                 android:name=".Sessions.Members.pages.Dashboard.GymSelection.GymItem.GymItemActivity"
                 android:exported="false"/>
@@ -21,9 +26,6 @@
                 android:exported="false"/>
         <activity
                 android:name=".Sessions.GymCoach.pages.Exercises.AddExercise.AddExerciseActivity"
-                android:exported="false"/>
-        <activity
-                android:name=".Sessions.Members.pages.Dashboard.DashboardDesk.Reservation.MemberReservationActivity"
                 android:exported="false"/>
         <activity
                 android:name=".Sessions.GymOwner.pages.Membership.ShowJoined.ShowJoinedmembershipActivity"

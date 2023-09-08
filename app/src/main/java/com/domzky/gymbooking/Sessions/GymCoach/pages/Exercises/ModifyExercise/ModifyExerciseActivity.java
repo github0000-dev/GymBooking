@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.domzky.gymbooking.Helpers.FieldSyntaxes.FieldValidations;
 import com.domzky.gymbooking.Helpers.Firebase.FirebaseHelper;
-import com.domzky.gymbooking.Helpers.Things.Exercises;
+import com.domzky.gymbooking.Helpers.Things.Exercise;
 import com.domzky.gymbooking.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -112,7 +112,7 @@ public class ModifyExerciseActivity extends AppCompatActivity {
                             progress.dismiss();
                             return;
                         }
-                        dbwrite.child(reset_uid).setValue(new Exercises(
+                        dbwrite.child(reset_uid).setValue(new Exercise(
                                 name,
                                 preferences.getString("userid",""),
                                 description,

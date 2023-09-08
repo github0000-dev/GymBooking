@@ -25,8 +25,8 @@ public class MembersListAdapter extends RecyclerView.Adapter<MembersListAdapter.
         TextView membername,membertype;
         public ViewHolder(View itemView) {
             super(itemView);
-            membername = itemView.findViewById(R.id.coach_item_member_name);
-            membertype = itemView.findViewById(R.id.coach_item_member_type);
+            membername = itemView.findViewById(R.id.profile_item_member_name);
+            membertype = itemView.findViewById(R.id.profile_item_member_type);
         }
     }
 
@@ -36,7 +36,7 @@ public class MembersListAdapter extends RecyclerView.Adapter<MembersListAdapter.
     public MembersListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.coach_members_list_item,parent,false);
+        View view = inflater.inflate(R.layout.members_list_item,parent,false);
         MembersListAdapter.ViewHolder viewHolder = new MembersListAdapter.ViewHolder(view);
         return viewHolder;
     }
@@ -45,6 +45,12 @@ public class MembersListAdapter extends RecyclerView.Adapter<MembersListAdapter.
     public void onBindViewHolder(@NonNull MembersListAdapter.ViewHolder holder, int position) {
         GymMember member = list.get(position);
         holder.membername.setText(member.fullname);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 

@@ -10,11 +10,9 @@ import com.domzky.gymbooking.R;
 import com.google.android.material.tabs.TabLayout;
 
 public class DashboardFragment extends Fragment {
-
-    public DashboardFragment(){}
-    public TabLayout tabLayout;
-    public ViewPager2 viewPager;
-    public DashboardViewPagerAdapter dashboardViewPagerAdapter;
+    private TabLayout tabLayout;
+    private ViewPager2 viewPager;
+    private DashboardViewPagerAdapter dashboardViewPagerAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

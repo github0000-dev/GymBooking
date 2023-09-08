@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.domzky.gymbooking.Helpers.Firebase.FirebaseHelper;
-import com.domzky.gymbooking.Helpers.Things.Exercises;
+import com.domzky.gymbooking.Helpers.Things.Exercise;
 import com.domzky.gymbooking.R;
 import com.domzky.gymbooking.Sessions.GymCoach.pages.Exercises.AddExercise.AddExerciseActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -33,7 +33,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class ExercisesFragment extends Fragment {
 
-    private List<Exercises> list;
+    private List<Exercise> list;
 
     private DatabaseReference db = new FirebaseHelper().getExerciseReference();
 
@@ -70,7 +70,7 @@ public class ExercisesFragment extends Fragment {
                             snap.child("coach_id").getValue(String.class).equals(preferences.getString("userid",""))
                             && !snap.child("deleted").getValue(Boolean.class)
                     ) {
-                        list.add(new Exercises(
+                        list.add(new Exercise(
                                 snap.getKey(),
                                 snap.child("coach_id").getValue(String.class),
                                 snap.child("name").getValue(String.class),

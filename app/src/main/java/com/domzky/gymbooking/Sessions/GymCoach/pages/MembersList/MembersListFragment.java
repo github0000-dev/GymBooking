@@ -1,5 +1,6 @@
 package com.domzky.gymbooking.Sessions.GymCoach.pages.MembersList;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class MembersListFragment extends Fragment {
 
     private RecyclerView recview;
@@ -36,23 +39,35 @@ public class MembersListFragment extends Fragment {
 
         recview = view.findViewById(R.id.coach_menu_members_recview);
         list = new ArrayList<>();
+        Log.d("Gym_ID",getActivity().getSharedPreferences("coach", MODE_PRIVATE)
+                .getString("gymid",""));
 
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
                 for (DataSnapshot snap : snapshot.getChildren()) {
-                    list.add(new GymMember(
-                            snap.getKey(),
-                            snap.child("fullname").getValue(String.class)
+                    if (
+                           snap.child("Membership").exists() &&
+                           snap.child("Membership").child("gym_id").getValue(String.class)
+                                .equals(
+                                    getActivity().getSharedPreferences("coach", MODE_PRIVATE)
+                                        .getString("gymid","")
+                                )
+                    ) {
+                        list.add(new GymMember(
+                                snap.getKey(),
+                                snap.child("fullname").getValue(String.class)
                     ));
-                    recview.setAdapter(new MembersListAdapter(list));
-                    recview.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                    }
                 }
+                recview.setAdapter(new MembersListAdapter(list));
+                recview.setLayoutManager(new LinearLayoutManager(getContext()));
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("FIREBASE ERR",""+ error.getMessage());
+                Log.e("FIREBASE ERR",error.getMessage());
             }
         });
 

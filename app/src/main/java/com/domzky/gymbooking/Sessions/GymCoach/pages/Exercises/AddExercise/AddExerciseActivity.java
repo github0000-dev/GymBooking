@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.domzky.gymbooking.Helpers.FieldSyntaxes.FieldValidations;
 import com.domzky.gymbooking.Helpers.Firebase.FirebaseHelper;
-import com.domzky.gymbooking.Helpers.Things.Exercises;
+import com.domzky.gymbooking.Helpers.Things.Exercise;
 import com.domzky.gymbooking.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -86,7 +86,7 @@ public class AddExerciseActivity extends AppCompatActivity {
                             progress.dismiss();
                             return;
                         }
-                        dbwrite.push().setValue(new Exercises(
+                        dbwrite.push().setValue(new Exercise(
                                 name,
                                 preferences.getString("userid",""),
                                 description,
